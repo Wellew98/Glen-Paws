@@ -1,322 +1,849 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Dog, PawPrint, Phone, MessageCircle, MapPin, CheckCircle2, Clock, ShieldCheck, Stars } from "lucide-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlenPaws - Professional Dog Walking Services | Johannesburg South</title>
+    <meta name="description" content="Professional dog walking and pet care services in Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene. Trusted, reliable, and caring service for your beloved pets.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-// ==============================
-// GlenPaws Dog Walking – One‑Page Website
-// Tech: React + TailwindCSS + Framer Motion + Lucide icons
-// Notes:
-// - Replace placeholders (phone, email, WhatsApp link, prices) with your details.
-// - You can export this component into your builder or deploy with any React stack.
-// - All copy is tailored to Glenanda, Gleneagles, Bassonia, Glenvista, Oakdene.
-// ==============================
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-const areas = ["Glenanda", "Gleneagles", "Bassonia", "Glenvista", "Oakdene"];
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-const services = [
-  {
-    title: "Solo Walk (30 min)",
-    desc: "One-on-one neighbourhood walk tailored to your dog's pace.",
-    price: "from R120",
-    icon: <Clock className="w-6 h-6"/>,
-  },
-  {
-    title: "Solo Walk (60 min)",
-    desc: "Extra time for high‑energy pups. Local parks & greenbelts.",
-    price: "from R200",
-    icon: <Clock className="w-6 h-6"/>,
-  },
-  {
-    title: "Puppy Drop‑In",
-    desc: "15–20 min potty break, water top‑up, quick play & cuddle.",
-    price: "from R90",
-    icon: <PawPrint className="w-6 h-6"/>,
-  },
-  {
-    title: "Weekly Plan",
-    desc: "4–5x walks/week with friendly discounts for regulars.",
-    price: "save 10–15%",
-    icon: <Stars className="w-6 h-6"/>,
-  },
-];
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-const benefits = [
-  {
-    title: "Local & Reliable",
-    desc: "Based in Glenanda. We know every hill, park, and shortcut.",
-    icon: <MapPin className="w-6 h-6"/>,
-  },
-  {
-    title: "Safety First",
-    desc: "Leash‑only walks, GPS‑logged routes on request, and insured care.",
-    icon: <ShieldCheck className="w-6 h-6"/>,
-  },
-  {
-    title: "Happy Dogs, Happy Humans",
-    desc: "Calm, consistent handlers. Text/photo updates after every visit.",
-    icon: <MessageCircle className="w-6 h-6"/>,
-  },
-];
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-const faqs = [
-  {
-    q: "Which areas do you serve?",
-    a: "We currently serve Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene. Nearby suburbs on request.",
-  },
-  {
-    q: "Are you insured and background‑checked?",
-    a: "Yes. We operate with public liability cover and can provide clearances on request.",
-  },
-  {
-    q: "How do payments work?",
-    a: "EFT or card link. Weekly plans are billed in advance with flexible rescheduling.",
-  },
-  {
-    q: "Do you walk in the rain or heat?",
-    a: "We adjust for safety—shorter routes, shaded paths, water breaks, or reschedule when needed.",
-  },
-];
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
 
-const testimonials = [
-  {
-    name: "Lerato M.",
-    text: "Professional and so caring. Our Staffy waits by the gate on walk days!",
-    suburb: "Glenvista",
-  },
-  {
-    name: "Grant & Priya",
-    text: "Great updates and punctuality. We love the route photos after each walk.",
-    suburb: "Bassonia",
-  },
-  {
-    name: "Ayesha R.",
-    text: "Super reliable. Even our shy rescue warmed up quickly.",
-    suburb: "Oakdene",
-  },
-];
+        .logo::before {
+            content: "🐕";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
 
-export default function GlenPawsSite() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white text-stone-800">
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-amber-100">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Dog className="w-7 h-7 text-amber-600" />
-            <span className="font-bold text-lg">GlenPaws Dog Walking</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#services" className="hover:text-amber-700">Services</a>
-            <a href="#pricing" className="hover:text-amber-700">Pricing</a>
-            <a href="#whyus" className="hover:text-amber-700">Why Us</a>
-            <a href="#areas" className="hover:text-amber-700">Areas</a>
-            <a href="#contact" className="hover:text-amber-700">Book</a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <a
-              href="https://wa.me/27000000000?text=Hi%20GlenPaws!%20I'd%20like%20to%20book%20a%20walk."
-              className="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-2xl shadow hover:bg-amber-700 transition"
-            >
-              <MessageCircle className="w-5 h-5" /> WhatsApp Us
-            </a>
-          </div>
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(74, 144, 226, 0.9), rgba(53, 122, 189, 0.9)), 
+                        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjNjdCOTZBIi8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjE1MCIgcj0iNTAiIGZpbGw9IiM0Qzc5NEEiIG9wYWNpdHk9IjAuMyIvPgo8Y2lyY2xlIGN4PSI5MDAiIGN5PSIzMDAiIHI9IjgwIiBmaWxsPSIjNEM3OTRBIiBvcGFjaXR5PSIwLjIiLz4KPHN2Zz4K');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Service Areas */
+        .service-areas {
+            background: #f8f9fa;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .service-areas h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 3rem;
+        }
+
+        .area-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .area-card h3 {
+            color: #4a90e2;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Services */
+        .services {
+            padding: 80px 0;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            color: #4a90e2;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: #4a90e2;
+            opacity: 0.3;
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-info h4 {
+            color: #4a90e2;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: #4a90e2;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item::before {
+            content: attr(data-icon);
+            margin-right: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #357abd;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #4a90e2;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #4a90e2;
+                flex-direction: column;
+                padding: 20px 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                margin: 10px 0;
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .areas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .services,
+            .testimonials,
+            .contact {
+                padding: 60px 0;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form validation styles */
+        .form-group.error input,
+        .form-group.error textarea,
+        .form-group.error select {
+            border-color: #ff6b6b;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">GlenPaws</div>
+                <nav>
+                    <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
+                    <ul id="nav-menu">
+                        <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                        <li><a href="#services" onclick="scrollToSection('services')">Services</a></li>
+                        <li><a href="#areas" onclick="scrollToSection('areas')">Areas</a></li>
+                        <li><a href="#testimonials" onclick="scrollToSection('testimonials')">Testimonials</a></li>
+                        <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-      </header>
+    </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-          <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6}}>
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              Dog Walking in <span className="text-amber-700">Glenanda & Jozi South</span>
-            </h1>
-            <p className="mt-4 text-lg text-stone-600">
-              Caring, on‑time walks for happy tails in Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene.
-              Photo updates after every visit. Safety‑first, insured, and local.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#contact" className="bg-stone-900 text-white px-5 py-3 rounded-2xl shadow hover:bg-stone-800 transition">
-                Book a Walk
-              </a>
-              <a href="#pricing" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400">
-                View Pricing
-              </a>
-            </div>
-            <div className="mt-6 flex items-center gap-4 text-sm text-stone-600">
-              <div className="flex items-center gap-1"><ShieldCheck className="w-4 h-4"/> Insured</div>
-              <div className="flex items-center gap-1"><Clock className="w-4 h-4"/> On‑time</div>
-              <div className="flex items-center gap-1"><PawPrint className="w-4 h-4"/> Updates sent</div>
-            </div>
-          </motion.div>
-          <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.1}}>
-            <div className="relative bg-white rounded-3xl p-4 md:p-6 shadow-xl border border-amber-100">
-              <img
-                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop"
-                alt="Happy dog on a walk"
-                className="rounded-2xl object-cover w-full h-64 md:h-80"
-              />
-              <div className="absolute -bottom-4 left-6 right-6 bg-white rounded-2xl p-4 shadow-lg border border-stone-200">
-                <div className="flex items-center gap-3">
-                  <div className="bg-amber-100 p-2 rounded-xl"><Dog className="w-5 h-5 text-amber-700"/></div>
-                  <div>
-                    <p className="font-semibold">Trusted Local Walkers</p>
-                    <p className="text-sm text-stone-600">Glenanda • Gleneagles • Bassonia • Glenvista • Oakdene</p>
-                  </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Your Dog's Best Friend in Johannesburg South</h1>
+            <p>Professional, reliable dog walking services for Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene. Because every paw deserves care.</p>
+            <a href="#contact" class="cta-button" onclick="scrollToSection('contact')">Book a Walk Today</a>
+        </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section id="areas" class="service-areas">
+        <div class="container">
+            <h2>Proudly Serving</h2>
+            <p>We provide professional dog walking services across these beautiful Johannesburg South suburbs</p>
+            <div class="areas-grid">
+                <div class="area-card">
+                    <h3>Glenanda</h3>
+                    <p>Our home base - we know every park and pathway</p>
                 </div>
-              </div>
+                <div class="area-card">
+                    <h3>Gleneagles</h3>
+                    <p>Beautiful tree-lined streets perfect for walking</p>
+                </div>
+                <div class="area-card">
+                    <h3>Bassonia</h3>
+                    <p>Safe, family-friendly neighborhoods</p>
+                </div>
+                <div class="area-card">
+                    <h3>Glenvista</h3>
+                    <p>Spacious areas ideal for active dogs</p>
+                </div>
+                <div class="area-card">
+                    <h3>Oakdene</h3>
+                    <p>Quiet, secure streets for peaceful walks</p>
+                </div>
             </div>
-          </motion.div>
         </div>
-      </section>
+    </section>
 
-      {/* Areas Served */}
-      <section id="areas" className="py-12 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold">Areas We Serve</h2>
-          <p className="mt-2 text-stone-600">We focus on Johannesburg South so we can be fast, flexible, and reliable.</p>
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-3">
-            {areas.map((a) => (
-              <div key={a} className="rounded-2xl border border-stone-200 px-4 py-3 text-center shadow-sm bg-amber-50/50">
-                <span className="font-medium">{a}</span>
-              </div>
-            ))}
-          </div>
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🚶‍♀️</span>
+                    <h3>Standard Walk</h3>
+                    <p>30-minute neighbourhood walks perfect for daily exercise and bathroom breaks. Includes fresh water and lots of love.</p>
+                    <div class="price">R80 per walk</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🏃‍♀️</span>
+                    <h3>Extended Walk</h3>
+                    <p>60-minute adventure walks including park visits and socialization. Ideal for high-energy dogs who need extra exercise.</p>
+                    <div class="price">R140 per walk</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">👫</span>
+                    <h3>Group Walk</h3>
+                    <p>Socialization walks with other friendly dogs (max 4 dogs). Perfect for social pups who love making friends.</p>
+                    <div class="price">R60 per walk</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🎯</span>
+                    <h3>Puppy Visit</h3>
+                    <p>20-minute visits for puppies including playtime, basic training reinforcement, and potty breaks.</p>
+                    <div class="price">R50 per visit</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🏠</span>
+                    <h3>Pet Sitting</h3>
+                    <p>In-home care while you're away. Includes feeding, walks, playtime, and companionship for your furry family.</p>
+                    <div class="price">R200 per day</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">📅</span>
+                    <h3>Weekly Package</h3>
+                    <p>5 standard walks per week at a discounted rate. Perfect for busy professionals who want consistency.</p>
+                    <div class="price">R350 per week</div>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Services */}
-      <section id="services" className="py-12 md:py-16 bg-gradient-to-b from-white to-amber-50/60">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold">Services</h2>
-          <p className="mt-2 text-stone-600">Simple, flexible options for every dog and schedule.</p>
-          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((s) => (
-              <div key={s.title} className="rounded-3xl border border-amber-100 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <div className="flex items-center gap-3 text-amber-700">{s.icon}<span className="font-semibold">{s.title}</span></div>
-                <p className="mt-2 text-sm text-stone-600">{s.desc}</p>
-                <p className="mt-4 font-bold">{s.price}</p>
-              </div>
-            ))}
-          </div>
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Happy Customers</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        GlenPaws has been a lifesaver! Sarah is so reliable and my Golden Retriever Max absolutely loves his daily walks. I get photo updates every time, which gives me such peace of mind while I'm at work.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Lisa Mitchell</h4>
+                            <p>Glenanda • Max's Mom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        I was worried about trusting someone with my rescue dog Bella, but the team at GlenPaws showed such patience and care. Bella has come out of her shell completely!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Bassonia • Bella's Dad</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Professional, punctual, and my two Labs love their group walks. The weekly package is perfect for our busy family. Highly recommend GlenPaws to any pet parent!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Jennifer Adams</h4>
+                            <p>Glenvista • Charlie & Luna's Mom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        When I had surgery and couldn't walk Rocky for 3 weeks, GlenPaws stepped in immediately. They treated him like their own dog. Forever grateful!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>David Thompson</h4>
+                            <p>Gleneagles • Rocky's Dad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Why Us */}
-      <section id="whyus" className="py-12 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold">Why Local Owners Choose Us</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {benefits.map((b) => (
-              <div key={b.title} className="rounded-3xl border border-stone-200 p-6 bg-white shadow-sm">
-                <div className="flex items-center gap-3 text-amber-700">{b.icon}<span className="font-semibold">{b.title}</span></div>
-                <p className="mt-2 text-sm text-stone-600">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-          <ul className="mt-6 grid md:grid-cols-2 gap-3 text-sm text-stone-700">
-            {["Text & photo updates after each walk","Key pickup/lock code handling","Fresh water & towel wipe on request","No pack walks—max 1–2 dogs from one household"].map((item) => (
-              <li key={item} className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-700"/>{item}</li>
-            ))}
-          </ul>
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item" data-icon="📍">
+                        <div>
+                            <strong>Service Area</strong><br>
+                            Glenanda, Gleneagles, Bassonia, Glenvista & Oakdene
+                        </div>
+                    </div>
+                    <div class="contact-item" data-icon="📱">
+                        <div>
+                            <strong>Phone</strong><br>
+                            +27 11 123 4567
+                        </div>
+                    </div>
+                    <div class="contact-item" data-icon="✉️">
+                        <div>
+                            <strong>Email</strong><br>
+                            hello@glenpaws.co.za
+                        </div>
+                    </div>
+                    <div class="contact-item" data-icon="🕒">
+                        <div>
+                            <strong>Service Hours</strong><br>
+                            Monday - Sunday: 6AM - 7PM
+                        </div>
+                    </div>
+                    <div class="contact-item" data-icon="⚡">
+                        <div>
+                            <strong>Emergency Care</strong><br>
+                            Available for established clients
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <div class="success-message" id="successMessage">
+                        Thank you! We'll get back to you within 24 hours to schedule your consultation.
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error-message">Please enter your name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                            <div class="error-message">Please enter a valid phone number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Your Area *</label>
+                            <select id="area" name="area" required>
+                                <option value="">Select your area</option>
+                                <option value="glenanda">Glenanda</option>
+                                <option value="gleneagles">Gleneagles</option>
+                                <option value="bassonia">Bassonia</option>
+                                <option value="glenvista">Glenvista</option>
+                                <option value="oakdene">Oakdene</option>
+                            </select>
+                            <div class="error-message">Please select your area</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dogName">Dog's Name</label>
+                            <input type="text" id="dogName" name="dogName">
+                        </div>
+                        <div class="form-group">
+                            <label for="dogBreed">Dog's Breed & Age</label>
+                            <input type="text" id="dogBreed" name="dogBreed" placeholder="e.g., Golden Retriever, 3 years old">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="standard-walk">Standard Walk - R80</option>
+                                <option value="extended-walk">Extended Walk - R140</option>
+                                <option value="group-walk">Group Walk - R60</option>
+                                <option value="puppy-visit">Puppy Visit - R50</option>
+                                <option value="pet-sitting">Pet Sitting - R200/day</option>
+                                <option value="weekly-package">Weekly Package - R350</option>
+                                <option value="consultation">Free Consultation</option>
+                            </select>
+                            <div class="error-message">Please select a service</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Special Requirements or Questions</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your dog's personality, any special needs, preferred walk times, or questions you have..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Request Booking</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-12 md:py-16 bg-gradient-to-b from-amber-50/60 to-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold">Pricing</h2>
-          <p className="mt-2 text-stone-600">Transparent rates. No surprises. Ask about multi‑dog and weekly plan discounts.</p>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {[
-              {name: "30‑min Solo", price: "R120", detail: "Perfect for a midday stretch."},
-              {name: "60‑min Solo", price: "R200", detail: "For energetic pups & park routes."},
-              {name: "Puppy Drop‑In", price: "R90", detail: "Quick relief, water & cuddle."},
-            ].map((p) => (
-              <div key={p.name} className="rounded-3xl border border-amber-100 bg-white p-6 shadow-sm">
-                <h3 className="font-semibold text-lg">{p.name}</h3>
-                <p className="text-3xl font-extrabold mt-1">{p.price}</p>
-                <p className="text-sm text-stone-600 mt-1">{p.detail}</p>
-                <a href="#contact" className="mt-4 inline-block px-4 py-2 rounded-2xl bg-stone-900 text-white hover:bg-stone-800">Book</a>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-stone-500 mt-3">*Travel fees may apply just outside the listed suburbs. Public holidays +R30.</p>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>GlenPaws Dog Walking Services</h3>
+                <p>Professional, reliable, and caring dog walking services in Johannesburg South</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="WhatsApp">💬</a>
+                </div>
+            </div>
+            <p>&copy; 2025 GlenPaws. All rights reserved. | Insured & Bonded | Emergency Certified</p>
         </div>
-      </section>
+    </footer>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="py-12 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold">Kind Words from Neighbours</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <div key={i} className="rounded-3xl border border-stone-200 p-6 shadow-sm bg-white">
-                <p className="text-stone-700">“{t.text}”</p>
-                <p className="mt-3 text-sm text-stone-500">— {t.name}, {t.suburb}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
 
-      {/* Contact / Booking */}
-      <section id="contact" className="py-12 md:py-16 bg-gradient-to-b from-white to-amber-50/60">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
-          <div>
-            <h2 className="text-3xl font-bold">Request a Booking</h2>
-            <p className="mt-2 text-stone-600">Tell us a bit about your dog and preferred times. We reply quickly!</p>
-            <form onSubmit={(e)=>e.preventDefault()} className="mt-6 grid gap-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Your Name" required />
-                <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Phone or WhatsApp" required />
-              </div>
-              <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Email (optional)" />
-              <select className="w-full rounded-2xl border border-stone-300 px-4 py-3">
-                <option>Choose a Service</option>
-                <option>30‑min Solo Walk</option>
-                <option>60‑min Solo Walk</option>
-                <option>Puppy Drop‑In</option>
-                <option>Weekly Plan</option>
-              </select>
-              <textarea className="w-full rounded-2xl border border-stone-300 px-4 py-3" rows={4} placeholder="Tell us about your dog (age, breed, temperament) & preferred days/times"/>
-              <div className="flex flex-wrap gap-3">
-                <button className="px-5 py-3 rounded-2xl bg-amber-600 text-white hover:bg-amber-700">Send Request</button>
-                <a href="mailto:hello@glenpaws.co.za" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400">Email Us</a>
-                <a href="tel:+27000000000" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400 inline-flex items-center gap-2"><Phone className="w-4 h-4"/>Call</a>
-              </div>
-              <p className="text-xs text-stone-500">By submitting, you agree to our fair‑use & scheduling policy. We never share your details.</p>
-            </form>
-          </div>
-          <div className="rounded-3xl overflow-hidden border border-stone-200 shadow-sm bg-white">
-            <iframe
-              title="Map of Glenanda"
-              width="100%"
-              height="420"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3552.480993217079!2d28.056!3d-26.293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95a3a2b7d2ec7f%3A0x6f3f62b33f2a5b2!2sGlenanda%2C%20Johannesburg%20South!5e0!3m2!1sen!2sza!4v1689876543210"
-            />
-          </div>
-        </div>
-      </section>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close mobile menu if open
+            document.getElementById('nav-menu').classList.remove('active');
+        }
 
-      {/* Footer */}
-      <footer className="py-10 bg-stone-900 text-stone-200">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
-          <div className="flex items-center gap-2">
-            <Dog className="w-6 h-6 text-amber-400"/>
-            <span className="font-semibold">GlenPaws Dog Walking</span>
-          </div>
-          <div className="md:text-right text-sm">
-            <a href="#" className="hover:text-white">Terms</a>
-            <span className="mx-2">•</span>
-            <a href="#" className="hover:text-white">Privacy</a>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto px-4 mt-3 text-xs text-stone-400">Serving Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene.</div>
-      </footer>
-    </div>
-  );
-}
+        // Form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset previous error states
+            const formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach(group => group.classList.remove('error'));
+            
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => msg.style.display = 'none');
+            
+            let isValid = true;
+            
+            // Validate required fields
+            const requiredFields = [
+                { id: 'name', message: 'Please enter your name' },
+                { id: 'phone', message: 'Please enter a valid phone number' },
+                { id: 'email', message: 'Please enter a valid email address' },
+                { id: 'area', message: 'Please select your area' },
+                { id: 'service', message: 'Please select a service' }
+            ];
+            
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const formGroup = input.closest('.form-group');
+                const errorMsg = formGroup.querySelector('.error-message');
+                
+                if (!input.value.trim()) {
+                    formGroup.classList.add('error');
+                    errorMsg.textContent = field.message;
+                    errorMsg.style.display = 'block';
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const emailInput = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailInput.value && !emailRegex.test(emailInput.value)) {
+                const formGroup = emailInput.closest('.form-group');
+                const errorMsg = formGroup.querySelector('.error-message');
