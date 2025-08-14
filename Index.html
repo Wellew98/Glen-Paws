@@ -1,0 +1,322 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { Dog, PawPrint, Phone, MessageCircle, MapPin, CheckCircle2, Clock, ShieldCheck, Stars } from "lucide-react";
+
+// ==============================
+// GlenPaws Dog Walking – One‑Page Website
+// Tech: React + TailwindCSS + Framer Motion + Lucide icons
+// Notes:
+// - Replace placeholders (phone, email, WhatsApp link, prices) with your details.
+// - You can export this component into your builder or deploy with any React stack.
+// - All copy is tailored to Glenanda, Gleneagles, Bassonia, Glenvista, Oakdene.
+// ==============================
+
+const areas = ["Glenanda", "Gleneagles", "Bassonia", "Glenvista", "Oakdene"];
+
+const services = [
+  {
+    title: "Solo Walk (30 min)",
+    desc: "One-on-one neighbourhood walk tailored to your dog's pace.",
+    price: "from R120",
+    icon: <Clock className="w-6 h-6"/>,
+  },
+  {
+    title: "Solo Walk (60 min)",
+    desc: "Extra time for high‑energy pups. Local parks & greenbelts.",
+    price: "from R200",
+    icon: <Clock className="w-6 h-6"/>,
+  },
+  {
+    title: "Puppy Drop‑In",
+    desc: "15–20 min potty break, water top‑up, quick play & cuddle.",
+    price: "from R90",
+    icon: <PawPrint className="w-6 h-6"/>,
+  },
+  {
+    title: "Weekly Plan",
+    desc: "4–5x walks/week with friendly discounts for regulars.",
+    price: "save 10–15%",
+    icon: <Stars className="w-6 h-6"/>,
+  },
+];
+
+const benefits = [
+  {
+    title: "Local & Reliable",
+    desc: "Based in Glenanda. We know every hill, park, and shortcut.",
+    icon: <MapPin className="w-6 h-6"/>,
+  },
+  {
+    title: "Safety First",
+    desc: "Leash‑only walks, GPS‑logged routes on request, and insured care.",
+    icon: <ShieldCheck className="w-6 h-6"/>,
+  },
+  {
+    title: "Happy Dogs, Happy Humans",
+    desc: "Calm, consistent handlers. Text/photo updates after every visit.",
+    icon: <MessageCircle className="w-6 h-6"/>,
+  },
+];
+
+const faqs = [
+  {
+    q: "Which areas do you serve?",
+    a: "We currently serve Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene. Nearby suburbs on request.",
+  },
+  {
+    q: "Are you insured and background‑checked?",
+    a: "Yes. We operate with public liability cover and can provide clearances on request.",
+  },
+  {
+    q: "How do payments work?",
+    a: "EFT or card link. Weekly plans are billed in advance with flexible rescheduling.",
+  },
+  {
+    q: "Do you walk in the rain or heat?",
+    a: "We adjust for safety—shorter routes, shaded paths, water breaks, or reschedule when needed.",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Lerato M.",
+    text: "Professional and so caring. Our Staffy waits by the gate on walk days!",
+    suburb: "Glenvista",
+  },
+  {
+    name: "Grant & Priya",
+    text: "Great updates and punctuality. We love the route photos after each walk.",
+    suburb: "Bassonia",
+  },
+  {
+    name: "Ayesha R.",
+    text: "Super reliable. Even our shy rescue warmed up quickly.",
+    suburb: "Oakdene",
+  },
+];
+
+export default function GlenPawsSite() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white text-stone-800">
+      {/* Header */}
+      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-amber-100">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Dog className="w-7 h-7 text-amber-600" />
+            <span className="font-bold text-lg">GlenPaws Dog Walking</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#services" className="hover:text-amber-700">Services</a>
+            <a href="#pricing" className="hover:text-amber-700">Pricing</a>
+            <a href="#whyus" className="hover:text-amber-700">Why Us</a>
+            <a href="#areas" className="hover:text-amber-700">Areas</a>
+            <a href="#contact" className="hover:text-amber-700">Book</a>
+          </nav>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://wa.me/27000000000?text=Hi%20GlenPaws!%20I'd%20like%20to%20book%20a%20walk."
+              className="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-2xl shadow hover:bg-amber-700 transition"
+            >
+              <MessageCircle className="w-5 h-5" /> WhatsApp Us
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+          <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6}}>
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+              Dog Walking in <span className="text-amber-700">Glenanda & Jozi South</span>
+            </h1>
+            <p className="mt-4 text-lg text-stone-600">
+              Caring, on‑time walks for happy tails in Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene.
+              Photo updates after every visit. Safety‑first, insured, and local.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#contact" className="bg-stone-900 text-white px-5 py-3 rounded-2xl shadow hover:bg-stone-800 transition">
+                Book a Walk
+              </a>
+              <a href="#pricing" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400">
+                View Pricing
+              </a>
+            </div>
+            <div className="mt-6 flex items-center gap-4 text-sm text-stone-600">
+              <div className="flex items-center gap-1"><ShieldCheck className="w-4 h-4"/> Insured</div>
+              <div className="flex items-center gap-1"><Clock className="w-4 h-4"/> On‑time</div>
+              <div className="flex items-center gap-1"><PawPrint className="w-4 h-4"/> Updates sent</div>
+            </div>
+          </motion.div>
+          <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.1}}>
+            <div className="relative bg-white rounded-3xl p-4 md:p-6 shadow-xl border border-amber-100">
+              <img
+                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop"
+                alt="Happy dog on a walk"
+                className="rounded-2xl object-cover w-full h-64 md:h-80"
+              />
+              <div className="absolute -bottom-4 left-6 right-6 bg-white rounded-2xl p-4 shadow-lg border border-stone-200">
+                <div className="flex items-center gap-3">
+                  <div className="bg-amber-100 p-2 rounded-xl"><Dog className="w-5 h-5 text-amber-700"/></div>
+                  <div>
+                    <p className="font-semibold">Trusted Local Walkers</p>
+                    <p className="text-sm text-stone-600">Glenanda • Gleneagles • Bassonia • Glenvista • Oakdene</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Areas Served */}
+      <section id="areas" className="py-12 md:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold">Areas We Serve</h2>
+          <p className="mt-2 text-stone-600">We focus on Johannesburg South so we can be fast, flexible, and reliable.</p>
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-3">
+            {areas.map((a) => (
+              <div key={a} className="rounded-2xl border border-stone-200 px-4 py-3 text-center shadow-sm bg-amber-50/50">
+                <span className="font-medium">{a}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-12 md:py-16 bg-gradient-to-b from-white to-amber-50/60">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold">Services</h2>
+          <p className="mt-2 text-stone-600">Simple, flexible options for every dog and schedule.</p>
+          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((s) => (
+              <div key={s.title} className="rounded-3xl border border-amber-100 bg-white p-6 shadow-sm hover:shadow-md transition">
+                <div className="flex items-center gap-3 text-amber-700">{s.icon}<span className="font-semibold">{s.title}</span></div>
+                <p className="mt-2 text-sm text-stone-600">{s.desc}</p>
+                <p className="mt-4 font-bold">{s.price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Us */}
+      <section id="whyus" className="py-12 md:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold">Why Local Owners Choose Us</h2>
+          <div className="mt-8 grid md:grid-cols-3 gap-6">
+            {benefits.map((b) => (
+              <div key={b.title} className="rounded-3xl border border-stone-200 p-6 bg-white shadow-sm">
+                <div className="flex items-center gap-3 text-amber-700">{b.icon}<span className="font-semibold">{b.title}</span></div>
+                <p className="mt-2 text-sm text-stone-600">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+          <ul className="mt-6 grid md:grid-cols-2 gap-3 text-sm text-stone-700">
+            {["Text & photo updates after each walk","Key pickup/lock code handling","Fresh water & towel wipe on request","No pack walks—max 1–2 dogs from one household"].map((item) => (
+              <li key={item} className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-700"/>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="py-12 md:py-16 bg-gradient-to-b from-amber-50/60 to-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold">Pricing</h2>
+          <p className="mt-2 text-stone-600">Transparent rates. No surprises. Ask about multi‑dog and weekly plan discounts.</p>
+          <div className="mt-8 grid md:grid-cols-3 gap-6">
+            {[
+              {name: "30‑min Solo", price: "R120", detail: "Perfect for a midday stretch."},
+              {name: "60‑min Solo", price: "R200", detail: "For energetic pups & park routes."},
+              {name: "Puppy Drop‑In", price: "R90", detail: "Quick relief, water & cuddle."},
+            ].map((p) => (
+              <div key={p.name} className="rounded-3xl border border-amber-100 bg-white p-6 shadow-sm">
+                <h3 className="font-semibold text-lg">{p.name}</h3>
+                <p className="text-3xl font-extrabold mt-1">{p.price}</p>
+                <p className="text-sm text-stone-600 mt-1">{p.detail}</p>
+                <a href="#contact" className="mt-4 inline-block px-4 py-2 rounded-2xl bg-stone-900 text-white hover:bg-stone-800">Book</a>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-stone-500 mt-3">*Travel fees may apply just outside the listed suburbs. Public holidays +R30.</p>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials" className="py-12 md:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold">Kind Words from Neighbours</h2>
+          <div className="mt-8 grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="rounded-3xl border border-stone-200 p-6 shadow-sm bg-white">
+                <p className="text-stone-700">“{t.text}”</p>
+                <p className="mt-3 text-sm text-stone-500">— {t.name}, {t.suburb}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact / Booking */}
+      <section id="contact" className="py-12 md:py-16 bg-gradient-to-b from-white to-amber-50/60">
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+          <div>
+            <h2 className="text-3xl font-bold">Request a Booking</h2>
+            <p className="mt-2 text-stone-600">Tell us a bit about your dog and preferred times. We reply quickly!</p>
+            <form onSubmit={(e)=>e.preventDefault()} className="mt-6 grid gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Your Name" required />
+                <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Phone or WhatsApp" required />
+              </div>
+              <input className="w-full rounded-2xl border border-stone-300 px-4 py-3" placeholder="Email (optional)" />
+              <select className="w-full rounded-2xl border border-stone-300 px-4 py-3">
+                <option>Choose a Service</option>
+                <option>30‑min Solo Walk</option>
+                <option>60‑min Solo Walk</option>
+                <option>Puppy Drop‑In</option>
+                <option>Weekly Plan</option>
+              </select>
+              <textarea className="w-full rounded-2xl border border-stone-300 px-4 py-3" rows={4} placeholder="Tell us about your dog (age, breed, temperament) & preferred days/times"/>
+              <div className="flex flex-wrap gap-3">
+                <button className="px-5 py-3 rounded-2xl bg-amber-600 text-white hover:bg-amber-700">Send Request</button>
+                <a href="mailto:hello@glenpaws.co.za" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400">Email Us</a>
+                <a href="tel:+27000000000" className="px-5 py-3 rounded-2xl border border-stone-300 hover:border-stone-400 inline-flex items-center gap-2"><Phone className="w-4 h-4"/>Call</a>
+              </div>
+              <p className="text-xs text-stone-500">By submitting, you agree to our fair‑use & scheduling policy. We never share your details.</p>
+            </form>
+          </div>
+          <div className="rounded-3xl overflow-hidden border border-stone-200 shadow-sm bg-white">
+            <iframe
+              title="Map of Glenanda"
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3552.480993217079!2d28.056!3d-26.293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95a3a2b7d2ec7f%3A0x6f3f62b33f2a5b2!2sGlenanda%2C%20Johannesburg%20South!5e0!3m2!1sen!2sza!4v1689876543210"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-10 bg-stone-900 text-stone-200">
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
+          <div className="flex items-center gap-2">
+            <Dog className="w-6 h-6 text-amber-400"/>
+            <span className="font-semibold">GlenPaws Dog Walking</span>
+          </div>
+          <div className="md:text-right text-sm">
+            <a href="#" className="hover:text-white">Terms</a>
+            <span className="mx-2">•</span>
+            <a href="#" className="hover:text-white">Privacy</a>
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto px-4 mt-3 text-xs text-stone-400">Serving Glenanda, Gleneagles, Bassonia, Glenvista, and Oakdene.</div>
+      </footer>
+    </div>
+  );
+}
