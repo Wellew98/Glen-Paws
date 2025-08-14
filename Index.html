@@ -847,3 +847,94 @@
             if (emailInput.value && !emailRegex.test(emailInput.value)) {
                 const formGroup = emailInput.closest('.form-group');
                 const errorMsg = formGroup.querySelector('.error-message');
+                formGroup.classList.add('error');
+                errorMsg.textContent = 'Please enter a valid email address';
+                errorMsg.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate phone number format
+            const phoneInput = document.getElementById('phone');
+            const phoneRegex = /^(\+27|0)[0-9]{9}$/;
+            if (phoneInput.value && !phoneRegex.test(phoneInput.value.replace(/\s/g, ''))) {
+                const formGroup = phoneInput.closest('.form-group');
+                const errorMsg = formGroup.querySelector('.error-message');
+                formGroup.classList.add('error');
+                errorMsg.textContent = 'Please enter a valid South African phone number';
+                errorMsg.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+                
+                // Scroll to top of form
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections for animation
+        document.querySelectorAll('.service-card, .area-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Update active nav item based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = ['home', 'areas', 'services', 'testimonials', 'contact'];
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = sectionId;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.style.opacity = link.getAttribute('href').substring(1) === current ? '1' : '0.8';
+            });
+        });
+        
+        // Add loading state to form submission
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        document.getElementById('contactForm').addEventListener('submit', function() {
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
