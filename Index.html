@@ -86,10 +86,11 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(74, 144, 226, 0.9), rgba(53, 122, 189, 0.9)), 
-                        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjNjdCOTZBIi8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjE1MCIgcj0iNTAiIGZpbGw9IiM0Qzc5NEEiIG9wYWNpdHk9IjAuMyIvPgo8Y2lyY2xlIGN4PSI5MDAiIGN5PSIzMDAiIHI9IjgwIiBmaWxsPSIjNEM3OTRBIiBvcGFjaXR5PSIwLjIiLz4KPHN2Zz4K');
+            background: linear-gradient(rgba(74, 144, 226, 0.7), rgba(53, 122, 189, 0.7)), 
+                        url('https://i.imgur.com/XGHjvKL.jpeg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             padding: 120px 0 80px;
             text-align: center;
@@ -692,7 +693,7 @@
                     <div class="contact-item" data-icon="✉️">
                         <div>
                             <strong>Email</strong><br>
-                            hello@glenpaws.co.za
+                            wellefp@gmail.com
                         </div>
                     </div>
                     <div class="contact-item" data-icon="🕒">
@@ -713,7 +714,10 @@
                     <div class="success-message" id="successMessage">
                         Thank you! We'll get back to you within 24 hours to schedule your consultation.
                     </div>
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/xeoqwpyj" method="POST">
+                        <input type="hidden" name="_next" value="#contact">
+                        <input type="hidden" name="_subject" value="New GlenPaws Booking Request">
+                        <input type="hidden" name="_cc" value="wellefp@gmail.com">
                         <div class="form-group">
                             <label for="name">Your Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -866,19 +870,47 @@
             }
             
             if (isValid) {
-                // Show success message
-                document.getElementById('successMessage').style.display = 'block';
+                // Show loading state
+                const submitBtn = document.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
                 
-                // Reset form
-                this.reset();
+                // Create FormData and submit to Formspree
+                const formData = new FormData(this);
                 
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 5000);
-                
-                // Scroll to top of form
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                fetch('https://formspree.io/f/xeoqwpyj', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Show success message
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Hide success message after 8 seconds
+                        setTimeout(() => {
+                            document.getElementById('successMessage').style.display = 'none';
+                        }, 8000);
+                        
+                        // Scroll to top of form
+                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Sorry, there was an error sending your message. Please try again or contact us directly at wellefp@gmail.com');
+                }).finally(() => {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
             }
         });
         
