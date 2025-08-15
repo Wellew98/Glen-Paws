@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizFlow - Automate Your Bookings</title>
+    <title>BizFlow - Automate Your Bookings in South Africa</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,12 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
+    <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+
     <style>
         /* CSS Reset and Global Styles */
         :root {
-            --primary-blue: #0052cc;
+            --primary-blue: #0d2c54; /* Dark blue from logo */
             --secondary-teal: #00a3bf;
             --dark-text: #172b4d;
             --light-text: #5e6c84;
@@ -77,17 +79,29 @@
             border-radius: 5px;
             font-weight: 600;
             transition: background-color 0.3s, transform 0.3s;
+            border: 2px solid var(--secondary-teal);
         }
 
         .btn:hover {
             background-color: #008a9e;
+            border-color: #008a9e;
             transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
         }
 
         /* Header */
         header {
             background: var(--white);
-            padding: 15px 0;
+            padding: 10px 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -102,16 +116,15 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            text-decoration: none;
+        .logo img {
+            height: 50px;
+            width: auto;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
+            align-items: center;
         }
 
         .nav-links li {
@@ -129,6 +142,13 @@
             color: var(--secondary-teal);
         }
         
+        .nav-links .btn-nav {
+            padding: 8px 20px;
+        }
+        .nav-links .btn-nav:hover {
+            color: var(--white);
+        }
+        
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
@@ -137,7 +157,7 @@
 
         /* Hero Section */
         #hero {
-            background: linear-gradient(rgba(0, 82, 204, 0.05), rgba(0, 82, 204, 0.05)), var(--white);
+            background: linear-gradient(rgba(13, 44, 84, 0.05), rgba(13, 44, 84, 0.05)), var(--white);
             padding-top: 180px;
             padding-bottom: 120px;
             text-align: center;
@@ -158,6 +178,12 @@
             color: var(--light-text);
             max-width: 600px;
             margin: 0 auto 30px auto;
+        }
+
+        #hero .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         /* Features Section */
@@ -182,7 +208,7 @@
         
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.1);
+            box-shadow: 0 8px 25px rgba(13, 44, 84, 0.1);
         }
 
         .feature-card i {
@@ -195,67 +221,44 @@
             color: var(--primary-blue);
         }
 
-        /* Industries Section */
-        .industries-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+        /* Demo Section */
+        #demo {
+            background-color: var(--white);
+        }
+        .demo-container {
             max-width: 900px;
             margin: 0 auto;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-
-        .industry-tag {
-            background-color: var(--secondary-teal);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        /* How It Works Section */
-        #how-it-works {
-             background-color: var(--background-light);
-        }
-        .how-it-works-steps {
+        .demo-tabs {
             display: flex;
-            justify-content: space-around;
+            background-color: var(--background-light);
+        }
+        .demo-tab {
+            flex: 1;
+            padding: 15px;
             text-align: center;
-            gap: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            background: none;
+            font-size: 1.1rem;
+            color: var(--light-text);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
         }
-        .step {
-            max-width: 300px;
-        }
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary-blue);
-            color: var(--white);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            border: 4px solid var(--secondary-teal);
-        }
-
-        /* Why BizFlow Section */
-        .why-bizflow-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .why-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .why-card i {
-            font-size: 2rem;
+        .demo-tab.active {
             color: var(--primary-blue);
-            margin-top: 5px;
+            border-bottom-color: var(--secondary-teal);
+        }
+        .demo-content {
+            display: none;
+        }
+        .demo-content.active {
+            display: block;
         }
 
         /* Pricing Section */
@@ -275,6 +278,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
             border: 2px solid var(--border-color);
+            transition: transform 0.3s;
         }
         .pricing-card.pro {
             border-color: var(--secondary-teal);
@@ -310,6 +314,9 @@
         }
 
         /* FAQ Section */
+        #faq {
+             background-color: var(--white);
+        }
         .faq-accordion {
             max-width: 800px;
             margin: 0 auto;
@@ -335,7 +342,7 @@
             color: var(--dark-text);
         }
         .faq-question:after {
-            content: '\f078'; /* Font Awesome down arrow */
+            content: '\f078';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             transition: transform 0.3s;
@@ -358,17 +365,7 @@
              background-color: var(--background-light);
              text-align: center;
         }
-        #contact p {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        #contact a {
-            font-size: 1.5rem;
-            color: var(--secondary-teal);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
+        
         /* Footer */
         footer {
             background-color: var(--dark-text);
@@ -388,7 +385,7 @@
                 width: 100%;
                 background: var(--white);
                 position: absolute;
-                top: 60px;
+                top: 70px;
                 left: 0;
                 padding: 20px 0;
                 box-shadow: 0 5px 10px rgba(0,0,0,0.1);
@@ -407,13 +404,10 @@
             #hero h1 {
                 font-size: 2.5rem;
             }
-            #hero p {
-                font-size: 1.1rem;
-            }
-            .how-it-works-steps {
+            #hero .hero-buttons {
                 flex-direction: column;
-                align-items: center;
             }
+            
             .pricing-card.pro {
                 transform: scale(1);
             }
@@ -425,13 +419,16 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#hero" class="logo">BizFlow</a>
+                <a href="#hero" class="logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAASFBMVEX///8AQ5wAP5sAPpoAPZgAQJsAQZoAP5oAQJoAQZkAN5cAN5YAPJoAQZoAP5kAO5gAO5cAPZkAOpcAO5YAPJkAO5kAQZgPqL36AAAAGXRSTlMA+5cq+dEN/dEN/dEN/dEN/dEN/dEN/dFNE9AAAAEMSURBVHja7d1BDoAgDAXQoFB8/5V2qYLJEnYmOHP3Lk1q1ZqZAAAAAAAAAAAAAADgX631+pl8v0bX9fS2L23L6ro+q21/u++4dq10nU6n31+vr+vr+sN3XV/W1/W1H+un6+tr35W27/o/tq/rS9v3v/fN67r+f/t73/e979/eBwAAAAAAAAAAAAA+r49mUv558/2W7P1+e33f37b12/1+ez3L1z/p+b5/vP2+P9t6v5+v1/u5/n/X+5329fn/gQAAAAAAAAAAAADwv7at63r7tG1Z733tO5z2HbrO6/Q967xO/953AAAAAAAAAAAAAAAAAAAAAAAAAAD4N58AAAD//wMALj4f4Z3cAAAAAElFTkSuQmCC" alt="BizFlow Logo">
+                </a>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#industries">Industries</a></li>
+                    <li><a href="#why-bizflow">Why Us</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="#demo" class="btn btn-nav">Try Demo</a></li>
                 </ul>
                 <div class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -443,126 +440,62 @@
     <section id="hero">
         <div class="container">
             <h1>Transform Your Bookings with BizFlow</h1>
-            <p>Automate appointments in minutes with our smart AI-powered booking bot.</p>
-            <a href="#pricing" class="btn">Get Started</a>
+            <p>Automate appointments in minutes with our smart AI-powered booking bot for South African businesses.</p>
+            <div class="hero-buttons">
+                 <a href="#pricing" class="btn">Get Started</a>
+                 <a href="#demo" class="btn btn-secondary">Try Demo</a>
+            </div>
         </div>
     </section>
 
     <section id="features">
         <div class="container">
-            <h2>Key Features</h2>
-            <p class="section-subtitle">Everything you need to streamline your appointments and delight your clients.</p>
+            <h2>Your All-In-One Booking Solution</h2>
+            <p class="section-subtitle">Everything you need to streamline appointments and delight your clients.</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>Smart Booking Bot</h3>
-                    <p>Let clients book real-time services and staff via our intelligent AI chat.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Instant Confirmations</h3>
-                    <p>Clients get confirmations after booking and before their appointments.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-history"></i>
-                    <h3>Automated Follow-ups</h3>
-                    <p>Easily remind clients when it’s time to rebook their next appointment.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-street-view"></i>
-                    <h3>Walk-ins Welcome</h3>
-                    <p>Use our smart waitlisting feature for your walk-in clients.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Powerful Analytics</h3>
-                    <p>Track booking volume, peak hours, and client retention (Pro only).</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Google Sync</h3>
-                    <p>Live Google Calendar sync & auto-opening of available slots.</p>
-                </div>
+                <div class="feature-card"> <i class="fas fa-robot"></i> <h3>Smart Booking Bot</h3> <p>Let clients book services and staff in real-time via our intelligent AI chat.</p> </div>
+                <div class="feature-card"> <i class="fas fa-check-circle"></i> <h3>Instant Confirmations</h3> <p>Clients get confirmations after booking and reminders before their appointments.</p> </div>
+                <div class="feature-card"> <i class="fas fa-history"></i> <h3>Automated Follow-ups</h3> <p>Easily remind clients when it’s time to rebook their next appointment.</p> </div>
+                <div class="feature-card"> <i class="fas fa-street-view"></i> <h3>Walk-ins Welcome</h3> <p>Use our smart waitlisting feature to manage your walk-in clients efficiently.</p> </div>
+                <div class="feature-card"> <i class="fas fa-chart-line"></i> <h3>Powerful Analytics</h3> <p>Track booking volume, peak hours, and client retention (Pro only).</p> </div>
+                <div class="feature-card"> <i class="fas fa-calendar-alt"></i> <h3>Google Sync</h3> <p>Live Google Calendar sync & auto-opening of available slots.</p> </div>
             </div>
         </div>
     </section>
 
-    <section id="industries">
-        <div class="container">
-            <h2>Industries We Support</h2>
-            <p class="section-subtitle">Perfect for any appointment-based business in South Africa.</p>
-            <div class="industries-list">
-                <span class="industry-tag">Barbershops</span>
-                <span class="industry-tag">Nail Salons</span>
-                <span class="industry-tag">Physiotherapists</span>
-                <span class="industry-tag">Dog Groomers</span>
-                <span class="industry-tag">Restaurants</span>
-                <span class="industry-tag">Beauticians</span>
-                <span class="industry-tag">Massage Therapists</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="how-it-works">
-        <div class="container">
-            <h2>How It Works</h2>
-            <p class="section-subtitle">Get set up and start accepting bookings in just a few simple steps.</p>
-            <div class="how-it-works-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Pick a Plan</h3>
-                    <p>Choose the plan that best fits your business needs.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Easy Setup</h3>
-                    <p>Answer a few questions and your chatbot + site go live in 24–48 hours.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Manage Bookings</h3>
-                    <p>Easily manage all your appointments from your simple dashboard.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="why-bizflow">
+    <section id="why-bizflow" style="background-color: var(--background-light);">
         <div class="container">
             <h2>Why BizFlow?</h2>
             <p class="section-subtitle">We are designed with the unique needs of South African businesses in mind.</p>
-            <div class="why-bizflow-grid">
-                 <div class="why-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <h3>Built for South Africa</h3>
-                        <p>Affordable, quick, and effective solutions for local businesses.</p>
-                    </div>
+            <div class="features-grid">
+                 <div class="feature-card"> <i class="fas fa-map-marker-alt"></i> <h3>Built for South Africa</h3> <p>Affordable, quick, and effective solutions for local businesses.</p> </div>
+                 <div class="feature-card"> <i class="fas fa-brain"></i> <h3>AI Does The Heavy Lifting</h3> <p>Get online without the hassle. Let our smart AI handle the work.</p> </div>
+                 <div class="feature-card"> <i class="fas fa-user-shield"></i> <h3>You Stay in Charge</h3> <p>You own your success. All bookings and client data are yours.</p> </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo">
+        <div class="container">
+            <h2>Try Our Demo</h2>
+            <p class="section-subtitle">See how BizFlow can work for your business. Interact with our demo bots below.</p>
+            <div class="demo-container">
+                <div class="demo-tabs">
+                    <button class="demo-tab active" data-target="#nailSalonBot">💅 Nail Salon</button>
+                    <button class="demo-tab" data-target="#barberShopBot">💈 Barbershop</button>
                 </div>
-                <div class="why-card">
-                    <i class="fas fa-brain"></i>
-                    <div>
-                        <h3>AI Does The Heavy Lifting</h3>
-                        <p>Get online without the hassle. Let our smart AI handle the work.</p>
-                    </div>
+                
+                <div id="nailSalonBot" class="demo-content active">
+                    <div id="nailSalonContainer" style="width: 100%; height: 500px"></div>
                 </div>
-                <div class="why-card">
-                    <i class="fas fa-user-shield"></i>
-                    <div>
-                        <h3>You Stay in Charge</h3>
-                        <p>You own your success. All bookings and client data are yours.</p>
-                    </div>
-                </div>
-                <div class="why-card">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <div>
-                        <h3>Simple & Transparent Pricing</h3>
-                        <p>No hidden fees. Just clear, straightforward plans that make sense.</p>
-                    </div>
+
+                <div id="barberShopBot" class="demo-content">
+                    <div id="barberShopContainer" style="width: 100%; height: 500px"></div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <section id="pricing">
         <div class="container">
@@ -570,22 +503,17 @@
             <p class="section-subtitle">Simple, transparent pricing plans for businesses of all sizes.</p>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Standard</h3>
-                    <p>Perfect for small businesses.</p>
-                    <div class="price">R399<span>/month</span></div>
+                    <h3>Standard</h3> <p>Perfect for small businesses.</p> <div class="price">R399<span>/month</span></div>
                     <ul>
                         <li><i class="fas fa-check"></i>AI-powered booking chatbot</li>
                         <li><i class="fas fa-check"></i>Email reminders & rebooking prompts</li>
                         <li><i class="fas fa-check"></i>Google Calendar integration</li>
                         <li><i class="fas fa-check"></i>Uptime monitoring & support</li>
                         <li><i class="fas fa-check"></i>Up to 200 bookings/month</li>
-                    </ul>
-                    <a href="#contact" class="btn">Choose Standard</a>
+                    </ul> <a href="#contact" class="btn">Choose Standard</a>
                 </div>
                 <div class="pricing-card pro">
-                    <h3>Pro</h3>
-                    <p>Ideal for high-volume businesses.</p>
-                    <div class="price">R699<span>/month</span></div>
+                    <h3>Pro</h3> <p>Ideal for high-volume businesses.</p> <div class="price">R699<span>/month</span></div>
                     <ul>
                         <li><i class="fas fa-check"></i>Everything in Standard, plus:</li>
                         <li><i class="fas fa-check"></i>SMS confirmations & rebooking nudges</li>
@@ -593,16 +521,33 @@
                         <li><i class="fas fa-check"></i>Enhanced analytics & reporting</li>
                         <li><i class="fas fa-check"></i>AI customer insights (soon)</li>
                         <li><i class="fas fa-check"></i>Up to 400 bookings/month</li>
-                    </ul>
-                    <a href="#contact" class="btn">Choose Pro</a>
+                    </ul> <a href="#contact" class="btn">Choose Pro</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <p>For businesses ready to scale.</p>
-                    <div class="price">From R1,200<span>/month</span></div>
+                    <h3>Enterprise</h3> <p>For businesses ready to scale.</p> <div class="price">From R1,200<span>/month</span></div>
                     <ul>
                         <li><i class="fas fa-check"></i>Fully custom solution</li>
                         <li><i class="fas fa-check"></i>API access & advanced automation</li>
                         <li><i class="fas fa-check"></i>Chain-wide analytics dashboard</li>
                         <li><i class="fas fa-check"></i>Volume-based SMS scaling</li>
-                        <li><i class="fas fa
+                        <li><i class="fas fa-check"></i>Priority Support</li>
+                    </ul> <a href="#contact" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item"> <button class="faq-question">Do I need a website?</button> <div class="faq-answer"> <p>No — we’ll set you up with a branded 1-page site if needed. Our chatbot can also be integrated into an existing website or your social media pages.</p> </div> </div>
+                <div class="faq-item"> <button class="faq-question">Do you send booking reminders?</button> <div class="faq-answer"> <p>Yes! Pro users get automatic SMS text confirmations and follow-up reminders to reduce no-shows and encourage rebooking.</p> </div> </div>
+                <div class="faq-item"> <button class="faq-question">What support do you offer?</button> <div class="faq-answer"> <p>The Standard plan includes email support. The Pro plan adds priority email & SMS support for faster assistance.</p> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Ready to 
