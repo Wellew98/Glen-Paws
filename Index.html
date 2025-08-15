@@ -87,7 +87,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(74, 144, 226, 0.7), rgba(53, 122, 189, 0.7)), 
-                        url('https://i.imgur.com/XGHjvKL.jpeg');
+                        url('https://i.imgur.com/FEJmdrT.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -714,10 +714,7 @@
                     <div class="success-message" id="successMessage">
                         Thank you! We'll get back to you within 24 hours to schedule your consultation.
                     </div>
-                    <form id="contactForm" action="https://formspree.io/f/xeoqwpyj" method="POST">
-                        <input type="hidden" name="_next" value="#contact">
-                        <input type="hidden" name="_subject" value="New GlenPaws Booking Request">
-                        <input type="hidden" name="_cc" value="wellefp@gmail.com">
+                    <form id="contactForm" action="mailto:wellefp@gmail.com" method="post" enctype="text/plain">
                         <div class="form-group">
                             <label for="name">Your Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -771,8 +768,16 @@
                             <label for="message">Special Requirements or Questions</label>
                             <textarea id="message" name="message" placeholder="Tell us about your dog's personality, any special needs, preferred walk times, or questions you have..."></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">Request Booking</button>
+                        <button type="submit" class="submit-btn">Send Email Request</button>
                     </form>
+                    
+                    <!-- WhatsApp Button -->
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="https://wa.me/27791065911?text=Hi%20GlenPaws!%20I%27m%20interested%20in%20your%20dog%20walking%20services.%20Can%20you%20please%20provide%20me%20with%20more%20information?" 
+                           class="whatsapp-btn" target="_blank">
+                            💬 WhatsApp Us Now
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
