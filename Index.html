@@ -1,321 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BizFlow – AI Booking Bot for Local Businesses</title>
-  <meta name="description" content="BizFlow helps South African local businesses automate bookings in minutes with an AI-powered chatbot, reminders, analytics, and Google Calendar sync." />
-  <meta name="theme-color" content="#0a6cff" />
-  <link rel="icon" href="/favicon.ico" />
-  <style>
-    :root {
-      --bg: #0b1020;
-      --card: #12172a;
-      --muted: #a7b0c0;
-      --text: #eaf1ff;
-      --brand: #1a73e8; /* primary */
-      --brand-2: #16b0a9; /* accent */
-      --ok: #12b886;
-      --warn: #f59f00;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --radius: 18px;
-    }
-    * { box-sizing: border-box }
-    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui,-apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.55 }
-    a { color: var(--brand); text-decoration: none }
-    a:hover { text-decoration: underline }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px }
-    header.site { position: sticky; top:0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(11,16,32,.9), rgba(11,16,32,.65)); border-bottom: 1px solid rgba(255,255,255,.06) }
-    .nav { display:flex; align-items:center; justify-content: space-between; padding: 14px 0 }
-    .brand { display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing:.2px }
-    .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow) }
-    .nav a.btn { background: var(--brand); color:white; padding:10px 16px; border-radius: 12px; font-weight:700; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.06) }
-    .nav a.btn.alt { background: transparent; border:1px solid rgba(255,255,255,.14) }
-    .hero { padding: 72px 0 36px; background: radial-gradient(1200px 500px at 70% -10%, rgba(22,176,169,.25), transparent 60%), radial-gradient(1000px 600px at 0% 0%, rgba(26,115,232,.22), transparent 60%) }
-    .hero .grid { display:grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items:center }
-    h1 { font-size: clamp(28px, 5vw, 56px); line-height:1.05; margin:0 0 16px }
-    .lead { font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); margin-bottom: 24px }
-    .cta { display:flex; gap:12px; flex-wrap: wrap }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius: 14px; background: var(--brand); color:white; font-weight:700; border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow) }
-    .btn.secondary { background: transparent; color: var(--text); border:1px solid rgba(255,255,255,.16) }
-    .card { background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: var(--radius); box-shadow: var(--shadow) }
-    .badges { display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px }
-    .badge { font-size: 12px; padding:6px 10px; border-radius: 999px; border:1px solid rgba(255,255,255,.16); color: var(--muted) }
-
-    .section { padding: 56px 0 }
-    .section h2 { font-size: clamp(22px, 3.6vw, 36px); margin:0 0 8px }
-    .section p.top { color: var(--muted); margin:0 0 28px }
-
-    .features { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px }
-    .feature { padding:18px; display:flex; gap:14px }
-    .icon { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, rgba(26,115,232,.2), rgba(22,176,169,.2)); display:grid; place-items:center; font-weight:800 }
-
-    .industries { display:grid; grid-template-columns: repeat(4, 1fr); gap:12px }
-    .pill { padding:10px 12px; border-radius: 999px; background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); text-align:center; color: var(--muted) }
-
-    .how-cards { display:grid; grid-template-columns: repeat(3,1fr); gap:16px }
-    .how-cards .card { padding:18px }
-
-    .why-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:16px }
-    .why-grid .card { padding:18px }
-
-    .pricing { display:grid; grid-template-columns: repeat(3,1fr); gap:16px }
-    .price-card { padding:22px; position:relative }
-    .ribbon { position:absolute; top:14px; right:14px; font-size:11px; padding:6px 10px; border-radius:999px; background: rgba(26,115,232,.18); border:1px solid rgba(26,115,232,.35) }
-    .price { font-size: 32px; font-weight: 800; margin: 12px 0 }
-    .ul { margin: 10px 0 0 0; padding-left: 18px; color: var(--muted) }
-
-    .faq { display:grid; grid-template-columns: 1fr; gap:10px }
-    details.faq-item { background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 14px 16px }
-    details summary { cursor:pointer; font-weight:700 }
-
-    .contact { display:grid; grid-template-columns: 1.2fr 1fr; gap:16px }
-    form { display:grid; gap:10px }
-    input, textarea, select { background: #0e1530; color: var(--text); border:1px solid rgba(255,255,255,.12); border-radius: 12px; padding:12px 12px; outline: none }
-    input:focus, textarea:focus { border-color: var(--brand) }
-    .note { font-size: 12px; color: var(--muted) }
-
-    footer { padding: 36px 0; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted) }
-
-    @media (max-width: 980px) {
-      .hero .grid, .contact, .features, .pricing, .how-cards, .why-grid { grid-template-columns: 1fr }
-      .industries { grid-template-columns: repeat(2,1fr) }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizFlow AI Automation Agency</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #0d253f; color: white; padding: 20px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        .hero { padding: 50px; text-align: center; background: #f4f4f4; }
+        .section { padding: 40px; text-align: center; }
+        iframe { border: none; width: 100%; max-width: 400px; height: 500px; }
+        .btn { display: inline-block; padding: 10px 20px; background: #0d253f; color: white; text-decoration: none; border-radius: 5px; }
+        .btn:hover { background: #133b63; }
+    </style>
 </head>
 <body>
-  <header class="site">
-    <div class="wrap nav">
-      <a href="#top" class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span>BizFlow</span>
-      </a>
-      <nav style="display:flex; gap:12px; align-items:center">
-        <a class="btn alt" href="#features">Features</a>
-        <a class="btn alt" href="#pricing">Pricing</a>
-        <a class="btn" href="#contact">Get Started</a>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <h1>BizFlow AI Automation Agency</h1>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#demos">Try Demo</a>
+            <a href="#pricing">Pricing</a>
+        </nav>
+    </header><section class="hero">
+    <h2>We Automate Your Business Processes with AI</h2>
+    <p>Customer support, bookings, and more – fully automated for your business.</p>
+    <a href="#demos" class="btn">Try Demo</a>
+</section>
 
-  <main id="top" class="wrap">
-    <section class="hero">
-      <div class="grid">
-        <div>
-          <h1>Transform Your Bookings with BizFlow</h1>
-          <p class="lead">Automate appointments in minutes with our smart AI booking bot. Let customers book services, staff, and times via chat — with instant confirmations, reminders, and Google Calendar sync.</p>
-          <div class="cta">
-            <a class="btn" href="#pricing">See Plans</a>
-            <a class="btn secondary" href="https://wa.me/27791065911?text=Hi%20BizFlow%2C%20I%27d%20like%20to%20get%20set%20up" target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
-          <div class="badges">
-            <span class="badge">SA‑first</span>
-            <span class="badge">AI‑powered</span>
-            <span class="badge">No code needed</span>
-          </div>
-        </div>
-        <div class="card" style="padding:18px">
-          <p class="note">Live preview</p>
-          <div class="card" style="height: 280px; display:grid; place-items:center; border-style:dashed">
-            <div style="text-align:center">
-              <div style="font-weight:800; font-size:18px; margin-bottom:6px">Smart Booking Bot</div>
-              <div style="color:var(--muted); max-width: 28ch; margin: 0 auto 12px">Ask for a service, pick a time, get confirmed. That’s it.</div>
-              <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap">
-                <span class="badge">Barber</span>
-                <span class="badge">Nails</span>
-                <span class="badge">Massage</span>
-                <span class="badge">Taxi</span>
-              </div>
-            </div>
-          </div>
-          <p class="note">Demo widget placeholder — plug in your chatbot when ready.</p>
-        </div>
-      </div>
-    </section>
+<section id="services" class="section">
+    <h2>Our Services</h2>
+    <p>We provide AI-powered automation solutions tailored for small businesses.</p>
+    <ul style="list-style: none; padding: 0;">
+        <li>🤖 AI Customer Support Agents</li>
+        <li>💈 Automated Booking Systems for Barbershops</li>
+        <li>💅 Nail Salon Appointment Bots</li>
+    </ul>
+</section>
 
-    <section id="features" class="section">
-      <h2>Everything you need to automate bookings</h2>
-      <p class="top">Built for South African local businesses — fast to launch, easy to manage.</p>
-      <div class="features">
-        <div class="card feature"><div class="icon">🤖</div><div><strong>Smart booking bot</strong><br><span class="muted">Clients book staff & services via AI chat.</span></div></div>
-        <div class="card feature"><div class="icon">⚡</div><div><strong>Instant confirmations</strong><br><span class="muted">Email/SMS confirmations after booking & before the appointment.</span></div></div>
-        <div class="card feature"><div class="icon">🔁</div><div><strong>Automated follow‑ups</strong><br><span class="muted">Remind clients when it’s time to rebook.</span></div></div>
-        <div class="card feature"><div class="icon">🚶</div><div><strong>Walk‑ins</strong><br><span class="muted">Smart waitlisting for on‑site customers.</span></div></div>
-        <div class="card feature"><div class="icon">📈</div><div><strong>Analytics</strong><br><span class="muted">Track volume, peak hours & retention <em>(Pro)</em>.</span></div></div>
-        <div class="card feature"><div class="icon">📆</div><div><strong>Google sync</strong><br><span class="muted">Live Google Calendar sync & auto‑open slots.</span></div></div>
-      </div>
-    </section>
+<section id="demos" class="section" style="background: #f9f9f9;">
+    <h2>Try Our Demo Bots</h2>
+    <h3>BizFlow AI Customer Support</h3>
+    <iframe src="BIZFLOW_SUPPORT_BOT_URL"></iframe>
 
-    <section class="section">
-      <h2>Industries we support</h2>
-      <p class="top">If you take bookings, BizFlow works for you.</p>
-      <div class="industries">
-        <div class="pill">Barbershops</div>
-        <div class="pill">Nail Salons</div>
-        <div class="pill">Physiotherapists</div>
-        <div class="pill">Dog Groomers</div>
-        <div class="pill">Taxis</div>
-        <div class="pill">Restaurants</div>
-        <div class="pill">Beauticians</div>
-        <div class="pill">Massage Therapists</div>
-      </div>
-    </section>
+    <h3>Barbershop Booking Bot</h3>
+    <iframe src="BARBERSHOP_BOT_URL"></iframe>
 
-    <section class="section">
-      <h2>How it works</h2>
-      <div class="how-cards">
-        <div class="card"><strong>1) Pick a plan</strong><br><span class="muted">Choose Standard, Pro, or Enterprise.</span></div>
-        <div class="card"><strong>2) Quick setup</strong><br><span class="muted">Answer a few questions — we configure your chatbot + mini‑site in 24–48 hours.</span></div>
-        <div class="card"><strong>3) Go live</strong><br><span class="muted">Share your link, manage bookings from your dashboard.</span></div>
-      </div>
-    </section>
+    <h3>Nail Salon Booking Bot</h3>
+    <iframe src="NAIL_SALON_BOT_URL"></iframe>
+</section>
 
-    <section class="section">
-      <h2>Why BizFlow?</h2>
-      <div class="why-grid">
-        <div class="card"><strong>SA‑ready</strong><br><span class="muted">Local support, ZAR pricing, and WhatsApp‑friendly flows.</span></div>
-        <div class="card"><strong>Yours to own</strong><br><span class="muted">Your data and bookings stay yours.</span></div>
-        <div class="card"><strong>No fluff</strong><br><span class="muted">Fast setup. Clear features. Real results.</span></div>
-        <div class="card"><strong>Affordable</strong><br><span class="muted">Transparent pricing that scales with you.</span></div>
-      </div>
-    </section>
+<section id="pricing" class="section">
+    <h2>Pricing</h2>
+    <p>Affordable plans to suit your business needs.</p>
+</section>
 
-    <section id="pricing" class="section">
-      <h2>Simple, transparent pricing</h2>
-      <p class="top">Choose the plan that fits your volume. Cancel anytime.</p>
-      <div class="pricing">
-        <div class="card price-card">
-          <div class="ribbon">Starter</div>
-          <h3>Standard</h3>
-          <div class="price">R399<span class="note">/month</span></div>
-          <ul class="ul">
-            <li>AI booking chatbot</li>
-            <li>Email reminders + rebooking prompts</li>
-            <li>Google Calendar integration</li>
-            <li>Uptime monitoring & support</li>
-            <li>Up to 200 bookings/month</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn" href="#contact">Start Standard</a>
-          </div>
-        </div>
-        <div class="card price-card" style="border-color: rgba(26,115,232,.5)">
-          <div class="ribbon">Best for growth</div>
-          <h3>Pro</h3>
-          <div class="price">R699<span class="note">/month</span></div>
-          <ul class="ul">
-            <li>Everything in Standard</li>
-            <li>SMS confirmations & rebooking nudges (up to 250/month)</li>
-            <li>Priority support</li>
-            <li>Enhanced analytics & reporting</li>
-            <li>AI customer insights (coming soon)</li>
-            <li>Up to 400 bookings/month</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn" href="#contact">Upgrade to Pro</a>
-          </div>
-        </div>
-        <div class="card price-card">
-          <div class="ribbon">Custom</div>
-          <h3>Enterprise</h3>
-          <div class="price">From R1,200<span class="note">/month</span></div>
-          <ul class="ul">
-            <li>Fully custom solution</li>
-            <li>API access & advanced automation</li>
-            <li>Chain‑wide analytics dashboard</li>
-            <li>Volume‑based SMS scaling</li>
-            <li>Priority support</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn" href="#contact">Talk to Sales</a>
-          </div>
-        </div>
-      </div>
-      <p class="note" style="margin-top:10px">Prices shown are monthly. VAT excluded. Enterprise includes an optional free 1‑page website.</p>
-    </section>
+<footer style="background: #0d253f; color: white; text-align: center; padding: 15px;">
+    <p>&copy; 2025 BizFlow AI. All Rights Reserved.</p>
+</footer>
 
-    <section class="section">
-      <h2>FAQs</h2>
-      <div class="faq">
-        <details class="faq-item"><summary>Do I need a website to start?</summary><p>No — we’ll set you up with a branded 1‑page site if needed.</p></details>
-        <details class="faq-item"><summary>Do you send booking reminders?</summary><p>Yes. Pro includes SMS confirmations and follow‑ups. Standard includes email reminders.</p></details>
-        <details class="faq-item"><summary>What support do you offer?</summary><p>Standard includes email support. Pro adds priority email & SMS support. Enterprise gets priority onboarding.</p></details>
-        <details class="faq-item"><summary>Can I use my Google Calendar?</summary><p>Yes. BizFlow syncs in real time and can auto‑open slots.</p></details>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2>Get started</h2>
-      <div class="contact">
-        <div class="card" style="padding:18px">
-          <form name="bizflow-contact" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="bizflow-contact" />
-            <label>
-              <span class="note">Your name</span>
-              <input type="text" name="name" placeholder="Your name" required />
-            </label>
-            <label>
-              <span class="note">Email</span>
-              <input type="email" name="email" placeholder="you@example.com" required />
-            </label>
-            <label>
-              <span class="note">Business name</span>
-              <input type="text" name="business" placeholder="Business or brand" />
-            </label>
-            <label>
-              <span class="note">Plan</span>
-              <select name="plan">
-                <option>Standard</option>
-                <option>Pro</option>
-                <option>Enterprise</option>
-              </select>
-            </label>
-            <label>
-              <span class="note">Message</span>
-              <textarea name="message" rows="4" placeholder="Tell us what you need…"></textarea>
-            </label>
-            <button class="btn" type="submit">Request setup</button>
-            <p class="note">Prefer WhatsApp? <a href="https://wa.me/27791065911?text=Hi%20BizFlow%2C%20please%20set%20me%20up%20on%20[Standard/Pro/Enterprise]" target="_blank" rel="noopener">Message us</a>.</p>
-          </form>
-          <p class="note">Deploying on Netlify? The form works out of the box via <code>data-netlify</code>. If you host elsewhere, replace with Formspree or embed a Google Form.</p>
-        </div>
-        <div class="card" style="padding:18px">
-          <h3 style="margin-top:0">Contact</h3>
-          <p>Email: <a href="mailto:hello@bizflow.co.za">hello@bizflow.co.za</a></p>
-          <p>Based in South Africa • Serving Johannesburg & Cape Town</p>
-          <div class="card" style="padding:12px; background: rgba(26,115,232,.08); border:1px dashed rgba(26,115,232,.35); margin-top:8px">
-            <strong>Embed a Google Form</strong>
-            <p class="note">Replace this box with your Google Form embed code when ready.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap" style="display:flex; gap:16px; justify-content:space-between; flex-wrap:wrap">
-      <div>© <span id="year"></span> BizFlow. All rights reserved.</div>
-      <div style="display:flex; gap:12px">
-        <a href="#">Terms of Service</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">PAIA</a>
-        <a href="#">POPIA</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // dynamic year and smooth scroll
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if (id.length > 1) {
-          e.preventDefault();
-          document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
