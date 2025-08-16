@@ -117,7 +117,7 @@
         }
 
         .logo img {
-            width: 140px; /* Adjusted for new logo */
+            width: 140px; 
             height: auto;
         }
 
@@ -367,7 +367,7 @@
                 width: 100%;
                 background: var(--white);
                 position: absolute;
-                top: 70px; /* Adjusted for header height */
+                top: 70px; 
                 left: 0;
                 padding: 20px 0;
                 box-shadow: 0 5px 10px rgba(0,0,0,0.1);
@@ -386,7 +386,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#hero" class="logo">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADcCAMAAAC83E0AAAAAkFBMVEX////9/f0AAAD8/PwFBQX7+/sICAgKCgr39/f6+vrz8/P19fX4+PgSEhJTU1NsbGxlZWVVVVWjo6Nzc3OysrKZmZl9fX14eHhubm5ISEjDw8NQUFA+Pj6oqKgwMDCIiIhmZmaAgIBgYGBbW1tERES5ublxcXGFhYWvr69LS0uQkJBLS0tPT086Ojpvb292dnaurq5/P5bbAAADvElEQVR4nO3b2XKqMBQGYBAEBARFlAsoKPhA8f//lYekAYmEBCeecd/rOWtMZ2eScKkhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD9T6dfrdbv/45e+Lr/b/Yfr9bqu2r4/3Y/34/fr/t5l27ruY/u2r20/P1+vV+v1vDze7qfr/t227f2/t5+3h9v9s+37w/3bPu///7x+/93v7bPt/eG+vT6e1wMA/Kzuy/Px+nxdT/djfbq/2f2T/bOfr+tr+30+3++H+/Z8317fD/fjevp8vF4fHx+343X7eHq8PwEA8Iu5r5fL29vl7eNy+3y6n6/ra/vn+fB8vt/v19vl+v4+317P+/3dfr+fr1er9fr1frlcLufr+v15fr6er+tr+3y93Jb7/Xm9n27L9fr0fH38/gQAwK/ufr1ev+9v/y/f15e3y8fr4/PzeD0+H+8P99v9vN1P18v9vN5f3++H/X49Xy/Xy/XyeLver1er/XQ9X18/f/+A/28u679/vJ+er9efr+er1fr992e1+11fV+v9/vH/e30+n++f7V/3X7u+/9t2vb2/7/v78/N8uVzO98v9uN++3+/nz/Zt+/t8vT5e7ufr+fr5AwDgr+7H6/7y/m3/Y/v4/vT+7/u+ff++/w8AwL/k/gMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAh3P7/X29vN/v37ft+/Zp+3h5u9+vt6v9+Hq+n++/9u3z/Xq5vN++H26X+/n+7frxeb0+f3x7vL39/gEA+DX36/W2bfv7/t1u1/fD7frz8nK9Pl/P97ft/ft8f/l8v7x8Pl+u56vV+uPj/Xy9XV7u94fr9Xq9Xq5v329vb7e3l+v7+/P7AwDwy7mvl8vl/nK5rT+vt8vb9ePl6vf78/p+v/+y/3q5/365/9++P1++r6/r/t3+vr2/P9v/2e9t+/vz/f0BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwE9yP1+vN23b1/W1fbxcP+/Px/vl+nX/4/f9Y/t6ub7d/3x+vh6v9/vN6/P1/f15fr++7y/f74/b7fP9/QEA+DX3+3m7vN1f7/ft+v7+vL++P9vf5+vz+/n94/b58nw9Py8/r/fT7e3t/uF+vb/+uL++3t++316/f7z+vrzcP95+P98fP34/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADA7/wHVYIBAOtzE/MAAAAASUVORK5CYII=" alt="BizFlow Logo">
+                    <img src="bizflow-logo.png" alt="BizFlow Logo">
                 </a>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#features">Features</a></li>
@@ -510,10 +510,8 @@
     </footer>
 
     <script>
-      // Wait for the DOM to be fully loaded before running any scripts
       document.addEventListener('DOMContentLoaded', function() {
     
-        // --- Mobile Menu Toggle ---
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.getElementById('nav-links');
         if (menuToggle && navLinks) {
@@ -522,20 +520,17 @@
             });
         }
     
-        // --- FAQ Accordion ---
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
                 const answer = faqItem.querySelector('.faq-answer');
                 
-                // Close other open FAQs
                 const currentlyActive = document.querySelector('.faq-item.active');
                 if (currentlyActive && currentlyActive !== faqItem) {
                     currentlyActive.classList.remove('active');
                     currentlyActive.querySelector('.faq-answer').style.maxHeight = 0;
                 }
 
-                // Toggle current FAQ
                 faqItem.classList.toggle('active');
                 if (faqItem.classList.contains('active')) {
                     answer.style.maxHeight = answer.scrollHeight + 'px';
@@ -545,7 +540,6 @@
             });
         });
     
-        // --- Demo Bot Tabs ---
         const tabs = document.querySelectorAll('.demo-tab');
         const contents = document.querySelectorAll('.demo-content');
         tabs.forEach(tab => {
@@ -561,11 +555,8 @@
             });
         });
 
-        // --- Initialize Landbot Bots ---
-        // Check if Landbot is available on the window object
         if (typeof Landbot !== 'undefined') {
 
-            // BizFlow Customer Support AI Agent (POP-UP BOT)
             var myLandbotPopup;
             function initLandbotPopup() {
                 if (!myLandbotPopup) {
@@ -577,24 +568,21 @@
             window.addEventListener('mouseover', initLandbotPopup, { once: true });
             window.addEventListener('touchstart', initLandbotPopup, { once: true });
             
-            // Nail Salon Bot (Embedded)
             new Landbot.Container({  
                 container: '#nailSalonContainer',  
                 configUrl: 'https://storage.googleapis.com/landbot.pro/v3/H-3035112-DFODATSZV0IK3GLS/index.json',  
             });
     
-            // Barbershop Bot (Embedded)
-            const barberConfigUrl = 'YOUR_BARBERSHOP_BOT_CONFIG_URL_HERE'; 
+            // ✅ Barbershop bot link is now correct
+            const barberConfigUrl = 'https://storage.googleapis.com/landbot.pro/v3/H-3001224-9K6G18F087PQMPJX/index.json';
+            
             const barberContainer = document.querySelector('#barberShopContainer');
 
-            if (barberConfigUrl && barberConfigUrl !== 'YOUR_BARBERSHOP_BOT_CONFIG_URL_HERE' && barberContainer) {
+            if (barberConfigUrl && barberContainer) {
                 new Landbot.Container({
                     container: barberContainer,
                     configUrl: barberConfigUrl, 
                 });
-            } else if (barberContainer) {
-                // Display a helpful message if the bot is not configured
-                barberContainer.innerHTML = '<div style="text-align:center; padding: 40px; color: #5e6c84; font-family: Poppins, sans-serif;">Barbershop bot demo is not configured yet.</div>';
             }
         } else {
           console.error('Landbot script not loaded.');
