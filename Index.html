@@ -14,10 +14,9 @@
     <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
 
     <style>
-        /* CSS Reset and Global Styles */
         :root {
-            --primary-blue: #0d2c54; /* Dark blue from logo */
-            --secondary-teal: #00a3bf;
+            --primary-blue: #2c2a5e; /* Dark purple from new logo */
+            --secondary-purple: #c4a1ff; /* Light purple from new logo */
             --dark-text: #172b4d;
             --light-text: #5e6c84;
             --background-light: #f4f5f7;
@@ -73,19 +72,20 @@
         .btn {
             display: inline-block;
             padding: 12px 28px;
-            background-color: var(--secondary-teal);
-            color: var(--white);
+            background-color: var(--secondary-purple);
+            color: var(--primary-blue);
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
-            transition: background-color 0.3s, transform 0.3s;
-            border: 2px solid var(--secondary-teal);
+            transition: all 0.3s;
+            border: 2px solid var(--secondary-purple);
         }
 
         .btn:hover {
-            background-color: #008a9e;
-            border-color: #008a9e;
+            background-color: #b185f5;
+            border-color: #b185f5;
             transform: translateY(-2px);
+            color: var(--primary-blue);
         }
         
         .btn-secondary {
@@ -117,8 +117,8 @@
         }
 
         .logo img {
-            height: 50px;
-            width: auto;
+            width: 140px; /* Adjusted for new logo */
+            height: auto;
         }
 
         .nav-links {
@@ -139,25 +139,26 @@
         }
 
         .nav-links a:hover {
-            color: var(--secondary-teal);
+            color: var(--secondary-purple);
         }
         
         .nav-links .btn-nav {
             padding: 8px 20px;
         }
         .nav-links .btn-nav:hover {
-            color: var(--white);
+            color: var(--primary-blue);
         }
         
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--primary-blue);
         }
 
         /* Hero Section */
         #hero {
-            background: linear-gradient(rgba(13, 44, 84, 0.05), rgba(13, 44, 84, 0.05)), var(--white);
+            background: var(--background-light);
             padding-top: 180px;
             padding-bottom: 120px;
             text-align: center;
@@ -184,19 +185,15 @@
             display: flex;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         /* Features Section */
-        #features {
-            background-color: var(--background-light);
-        }
-
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 30px;
         }
-
         .feature-card {
             background: var(--white);
             padding: 30px;
@@ -205,26 +202,20 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(13, 44, 84, 0.1);
+            box-shadow: 0 8px 25px rgba(44, 42, 94, 0.1);
         }
-
         .feature-card i {
             font-size: 3rem;
-            color: var(--secondary-teal);
+            color: var(--secondary-purple);
             margin-bottom: 20px;
         }
-        
         .feature-card h3 {
             color: var(--primary-blue);
         }
 
         /* Demo Section */
-        #demo {
-            background-color: var(--white);
-        }
         .demo-container {
             max-width: 900px;
             margin: 0 auto;
@@ -252,7 +243,7 @@
         }
         .demo-tab.active {
             color: var(--primary-blue);
-            border-bottom-color: var(--secondary-teal);
+            border-bottom-color: var(--secondary-purple);
         }
         .demo-content {
             display: none;
@@ -265,12 +256,6 @@
         #pricing {
             background-color: var(--background-light);
         }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            align-items: center;
-        }
         .pricing-card {
             background: var(--white);
             padding: 40px;
@@ -281,17 +266,12 @@
             transition: transform 0.3s;
         }
         .pricing-card.pro {
-            border-color: var(--secondary-teal);
+            border-color: var(--secondary-purple);
             transform: scale(1.05);
-        }
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
         }
         .price {
             font-size: 3rem;
             font-weight: 700;
-            color: var(--dark-text);
             margin: 10px 0;
         }
         .price span {
@@ -306,17 +286,13 @@
         }
         .pricing-card ul li {
             margin-bottom: 15px;
-            color: var(--light-text);
         }
         .pricing-card ul li i {
-            color: var(--secondary-teal);
+            color: var(--secondary-purple);
             margin-right: 10px;
         }
 
         /* FAQ Section */
-        #faq {
-             background-color: var(--white);
-        }
         .faq-accordion {
             max-width: 800px;
             margin: 0 auto;
@@ -326,6 +302,7 @@
             margin-bottom: 10px;
             border: 1px solid var(--border-color);
             border-radius: 5px;
+            overflow: hidden;
         }
         .faq-question {
             width: 100%;
@@ -341,13 +318,13 @@
             align-items: center;
             color: var(--dark-text);
         }
-        .faq-question:after {
+        .faq-question::after {
             content: '\f078';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             transition: transform 0.3s;
         }
-        .faq-item.active .faq-question:after {
+        .faq-item.active .faq-question::after {
             transform: rotate(180deg);
         }
         .faq-answer {
@@ -357,60 +334,49 @@
         }
         .faq-answer p {
             padding: 0 20px 20px;
-            color: var(--light-text);
         }
 
         /* Contact Section */
         #contact {
-             background-color: var(--background-light);
              text-align: center;
+        }
+        #contact .contact-link {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        #contact .contact-link:hover {
+            color: var(--secondary-purple);
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark-text);
+            background-color: var(--primary-blue);
             color: var(--white);
             text-align: center;
-            padding: 20px 0;
+            padding: 25px 0;
         }
         
-        /* Responsive Design */
         @media (max-width: 768px) {
-            h2 {
-                font-size: 2rem;
-            }
+            h2 { font-size: 2rem; }
             .nav-links {
                 display: none;
                 flex-direction: column;
                 width: 100%;
                 background: var(--white);
                 position: absolute;
-                top: 70px;
+                top: 70px; /* Adjusted for header height */
                 left: 0;
                 padding: 20px 0;
                 box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            
-            #hero h1 {
-                font-size: 2.5rem;
-            }
-            #hero .hero-buttons {
-                flex-direction: column;
-            }
-            
-            .pricing-card.pro {
-                transform: scale(1);
-            }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 10px 0; text-align: center; }
+            .menu-toggle { display: block; }
+            #hero h1 { font-size: 2.5rem; }
+            .pricing-card.pro { transform: scale(1); }
         }
     </style>
 </head>
@@ -420,7 +386,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#hero" class="logo">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAASFBMVEX///8AQ5wAP5sAPpoAPZgAQJsAQZoAP5oAQJoAQZkAN5cAN5YAPJoAQZoAP5kAO5gAO5cAPZkAOpcAO5YAPJkAO5kAQZgPqL36AAAAGXRSTlMA+5cq+dEN/dEN/dEN/dEN/dEN/dEN/dFNE9AAAAEMSURBVHja7d1BDoAgDAXQoFB8/5V2qYLJEnYmOHP3Lk1q1ZqZAAAAAAAAAAAAAADgX631+pl8v0bX9fS2L23L6ro+q21/u++4dq10nU6n31+vr+vr+sN3XV/W1/W1H+un6+tr35W27/o/tq/rS9v3v/fN67r+f/t73/e979/eBwAAAAAAAAAAAAA+r49mUv558/2W7P1+e33f37b12/1+ez3L1z/p+b5/vP2+P9t6v5+v1/u5/n/X+5329fn/gQAAAAAAAAAAAADwv7at63r7tG1Z733tO5z2HbrO6/Q967xO/953AAAAAAAAAAAAAAAAAAAAAAAAAAD4N58AAAD//wMALj4f4Z3cAAAAAElFTkSuQmCC" alt="BizFlow Logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADcCAMAAAC83E0AAAAAkFBMVEX////9/f0AAAD8/PwFBQX7+/sICAgKCgr39/f6+vrz8/P19fX4+PgSEhJTU1NsbGxlZWVVVVWjo6Nzc3OysrKZmZl9fX14eHhubm5ISEjDw8NQUFA+Pj6oqKgwMDCIiIhmZmaAgIBgYGBbW1tERES5ublxcXGFhYWvr69LS0uQkJBLS0tPT086Ojpvb292dnaurq5/P5bbAAADvElEQVR4nO3b2XKqMBQGYBAEBARFlAsoKPhA8f//lYekAYmEBCeecd/rOWtMZ2eScKkhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD9T6dfrdbv/45e+Lr/b/Yfr9bqu2r4/3Y/34/fr/t5l27ruY/u2r20/P1+vV+v1vDze7qfr/t227f2/t5+3h9v9s+37w/3bPu///7x+/93v7bPt/eG+vT6e1wMA/Kzuy/Px+nxdT/djfbq/2f2T/bOfr+tr+30+3++H+/Z8317fD/fjevp8vF4fHx+343X7eHq8PwEA8Iu5r5fL29vl7eNy+3y6n6/ra/vn+fB8vt/v19vl+v4+317P+/3dfr+fr1er9fr1frlcLufr+v15fr6er+tr+3y93Jb7/Xm9n27L9fr0fH38/gQAwK/ufr1ev+9v/y/f15e3y8fr4/PzeD0+H+8P99v9vN1P18v9vN5f3++H/X49Xy/Xy/XyeLver1er/XQ9X18/f/+A/28u679/vJ+er9efr+er1fr992e1+11fV+v9/vH/e30+n++f7V/3X7u+/9t2vb2/7/v78/N8uVzO98v9uN++3+/nz/Zt+/t8vT5e7ufr+fr5AwDgr+7H6/7y/m3/Y/v4/vT+7/u+ff++/w8AwL/k/gMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAh3P7/X29vN/v37ft+/Zp+3h5u9+vt6v9+Hq+n++/9u3z/Xq5vN++H26X+/n+7frxeb0+f3x7vL39/gEA+DX36/W2bfv7/t1u1/fD7frz8nK9Pl/P97ft/ft8f/l8v7x8Pl+u56vV+uPj/Xy9XV7u94fr9Xq9Xq5v329vb7e3l+v7+/P7AwDwy7mvl8vl/nK5rT+vt8vb9ePl6vf78/p+v/+y/3q5/365/9++P1++r6/r/t3+vr2/P9v/2e9t+/vz/f0BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwE9yP1+vN23b1/W1fbxcP+/Px/vl+nX/4/f9Y/t6ub7d/3x+vh6v9/vN6/P1/f15fr++7y/f74/b7fP9/QEA+DX3+3m7vN1f7/ft+v7+vL++P9vf5+vz+/n94/b58nw9Py8/r/fT7e3t/uF+vb/+uL++3t++316/f7z+vrzcP95+P98fP34/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADA7/wHVYIBAOtzE/MAAAAASUVORK5CYII=" alt="BizFlow Logo">
                 </a>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#features">Features</a></li>
@@ -437,117 +403,204 @@
         </div>
     </header>
 
-    <section id="hero">
-        <div class="container">
-            <h1>Transform Your Bookings with BizFlow</h1>
-            <p>Automate appointments in minutes with our smart AI-powered booking bot for South African businesses.</p>
-            <div class="hero-buttons">
-                 <a href="#pricing" class="btn">Get Started</a>
-                 <a href="#demo" class="btn btn-secondary">Try Demo</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="features">
-        <div class="container">
-            <h2>Your All-In-One Booking Solution</h2>
-            <p class="section-subtitle">Everything you need to streamline appointments and delight your clients.</p>
-            <div class="features-grid">
-                <div class="feature-card"> <i class="fas fa-robot"></i> <h3>Smart Booking Bot</h3> <p>Let clients book services and staff in real-time via our intelligent AI chat.</p> </div>
-                <div class="feature-card"> <i class="fas fa-check-circle"></i> <h3>Instant Confirmations</h3> <p>Clients get confirmations after booking and reminders before their appointments.</p> </div>
-                <div class="feature-card"> <i class="fas fa-history"></i> <h3>Automated Follow-ups</h3> <p>Easily remind clients when it’s time to rebook their next appointment.</p> </div>
-                <div class="feature-card"> <i class="fas fa-street-view"></i> <h3>Walk-ins Welcome</h3> <p>Use our smart waitlisting feature to manage your walk-in clients efficiently.</p> </div>
-                <div class="feature-card"> <i class="fas fa-chart-line"></i> <h3>Powerful Analytics</h3> <p>Track booking volume, peak hours, and client retention (Pro only).</p> </div>
-                <div class="feature-card"> <i class="fas fa-calendar-alt"></i> <h3>Google Sync</h3> <p>Live Google Calendar sync & auto-opening of available slots.</p> </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="why-bizflow" style="background-color: var(--background-light);">
-        <div class="container">
-            <h2>Why BizFlow?</h2>
-            <p class="section-subtitle">We are designed with the unique needs of South African businesses in mind.</p>
-            <div class="features-grid">
-                 <div class="feature-card"> <i class="fas fa-map-marker-alt"></i> <h3>Built for South Africa</h3> <p>Affordable, quick, and effective solutions for local businesses.</p> </div>
-                 <div class="feature-card"> <i class="fas fa-brain"></i> <h3>AI Does The Heavy Lifting</h3> <p>Get online without the hassle. Let our smart AI handle the work.</p> </div>
-                 <div class="feature-card"> <i class="fas fa-user-shield"></i> <h3>You Stay in Charge</h3> <p>You own your success. All bookings and client data are yours.</p> </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="demo">
-        <div class="container">
-            <h2>Try Our Demo</h2>
-            <p class="section-subtitle">See how BizFlow can work for your business. Interact with our demo bots below.</p>
-            <div class="demo-container">
-                <div class="demo-tabs">
-                    <button class="demo-tab active" data-target="#nailSalonBot">💅 Nail Salon</button>
-                    <button class="demo-tab" data-target="#barberShopBot">💈 Barbershop</button>
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Transform Your Bookings with BizFlow</h1>
+                <p>Automate appointments in minutes with our smart AI-powered booking bot for South African businesses.</p>
+                <div class="hero-buttons">
+                     <a href="#pricing" class="btn">Get Started</a>
+                     <a href="#demo" class="btn btn-secondary">Try Demo</a>
                 </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Your All-In-One Booking Solution</h2>
+                <p class="section-subtitle">Everything you need to streamline appointments and delight your clients.</p>
+                <div class="features-grid">
+                    <div class="feature-card"> <i class="fas fa-robot"></i> <h3>Smart Booking Bot</h3> <p>Let clients book services and staff in real-time via our intelligent AI chat.</p> </div>
+                    <div class="feature-card"> <i class="fas fa-check-circle"></i> <h3>Instant Confirmations</h3> <p>Clients get confirmations after booking and reminders before their appointments.</p> </div>
+                    <div class="feature-card"> <i class="fas fa-history"></i> <h3>Automated Follow-ups</h3> <p>Easily remind clients when it’s time to rebook their next appointment.</p> </div>
+                    <div class="feature-card"> <i class="fas fa-street-view"></i> <h3>Walk-ins Welcome</h3> <p>Use our smart waitlisting feature to manage your walk-in clients efficiently.</p> </div>
+                    <div class="feature-card"> <i class="fas fa-chart-line"></i> <h3>Powerful Analytics</h3> <p>Track booking volume, peak hours, and client retention (Pro only).</p> </div>
+                    <div class="feature-card"> <i class="fas fa-calendar-alt"></i> <h3>Google Sync</h3> <p>Live Google Calendar sync & auto-opening of available slots.</p> </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-bizflow" style="background-color: var(--background-light);">
+            <div class="container">
+                <h2>Why BizFlow?</h2>
+                <p class="section-subtitle">We are designed with the unique needs of South African businesses in mind.</p>
+                <div class="features-grid">
+                     <div class="feature-card"> <i class="fas fa-map-marker-alt"></i> <h3>Built for South Africa</h3> <p>Affordable, quick, and effective solutions for local businesses.</p> </div>
+                     <div class="feature-card"> <i class="fas fa-brain"></i> <h3>AI Does The Heavy Lifting</h3> <p>Get online without the hassle. Let our smart AI handle the work.</p> </div>
+                     <div class="feature-card"> <i class="fas fa-user-shield"></i> <h3>You Stay in Charge</h3> <p>You own your success. All bookings and client data are yours.</p> </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo">
+            <div class="container">
+                <h2>Try Our Demo</h2>
+                <p class="section-subtitle">See how BizFlow can work for your business. Interact with our demo bots below.</p>
+                <div class="demo-container">
+                    <div class="demo-tabs">
+                        <button class="demo-tab active" data-target="#nailSalonBotContent">💅 Nail Salon</button>
+                        <button class="demo-tab" data-target="#barberShopBotContent">💈 Barbershop</button>
+                    </div>
+                    <div id="nailSalonBotContent" class="demo-content active">
+                        <div id="nailSalonContainer" style="width: 100%; height: 500px"></div>
+                    </div>
+                    <div id="barberShopBotContent" class="demo-content">
+                        <div id="barberShopContainer" style="width: 100%; height: 500px"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <div class="container">
+                <h2>Our Pricing</h2>
+                <p class="section-subtitle">Simple, transparent pricing plans for businesses of all sizes.</p>
+                <div class="features-grid">
+                    <div class="pricing-card">
+                        <h3>Standard</h3> <p>Perfect for small businesses.</p> <div class="price">R399<span>/month</span></div>
+                        <ul> <li><i class="fas fa-check"></i>AI-powered booking chatbot</li> <li><i class="fas fa-check"></i>Email reminders & rebooking prompts</li> <li><i class="fas fa-check"></i>Google Calendar integration</li> <li><i class="fas fa-check"></i>Uptime monitoring & support</li> <li><i class="fas fa-check"></i>Up to 200 bookings/month</li> </ul> <a href="#contact" class="btn">Choose Standard</a>
+                    </div>
+                    <div class="pricing-card pro">
+                        <h3>Pro</h3> <p>Ideal for high-volume businesses.</p> <div class="price">R699<span>/month</span></div>
+                        <ul> <li><i class="fas fa-check"></i>Everything in Standard, plus:</li> <li><i class="fas fa-check"></i>SMS confirmations & rebooking nudges</li> <li><i class="fas fa-check"></i>Priority support</li> <li><i class="fas fa-check"></i>Enhanced analytics & reporting</li> <li><i class="fas fa-check"></i>AI customer insights (soon)</li> <li><i class="fas fa-check"></i>Up to 400 bookings/month</li> </ul> <a href="#contact" class="btn">Choose Pro</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3> <p>For businesses ready to scale.</p> <div class="price">From R1,200<span>/month</span></div>
+                        <ul> <li><i class="fas fa-check"></i>Fully custom solution</li> <li><i class="fas fa-check"></i>API access & advanced automation</li> <li><i class="fas fa-check"></i>Chain-wide analytics dashboard</li> <li><i class="fas fa-check"></i>Volume-based SMS scaling</li> <li><i class="fas fa-check"></i>Priority Support</li> </ul> <a href="#contact" class="btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item"> <button class="faq-question">Do I need a website?</button> <div class="faq-answer"> <p>No — we’ll set you up with a branded 1-page site if needed. Our chatbot can also be integrated into an existing website or your social media pages.</p> </div> </div>
+                    <div class="faq-item"> <button class="faq-question">Do you send booking reminders?</button> <div class="faq-answer"> <p>Yes! Pro users get automatic SMS text confirmations and follow-up reminders to reduce no-shows and encourage rebooking.</p> </div> </div>
+                    <div class="faq-item"> <button class="faq-question">What support do you offer?</button> <div class="faq-answer"> <p>The Standard plan includes email support. The Pro plan adds priority email & SMS support for faster assistance.</p> </div> </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="background-color: var(--background-light);">
+            <div class="container">
+                <h2>Ready to Transform Your Bookings?</h2>
+                <p class="section-subtitle">Get in touch today and let's get you started!</p>
+                <a href="mailto:wellefp@gmail.com" class="contact-link">wellefp@gmail.com</a>
+                <p style="margin-top: 20px;">Company based in South Africa</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BizFlow. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+      // Wait for the DOM to be fully loaded before running any scripts
+      document.addEventListener('DOMContentLoaded', function() {
+    
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    
+        // --- FAQ Accordion ---
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
                 
-                <div id="nailSalonBot" class="demo-content active">
-                    <div id="nailSalonContainer" style="width: 100%; height: 500px"></div>
-                </div>
+                // Close other open FAQs
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== faqItem) {
+                    currentlyActive.classList.remove('active');
+                    currentlyActive.querySelector('.faq-answer').style.maxHeight = 0;
+                }
 
-                <div id="barberShopBot" class="demo-content">
-                    <div id="barberShopContainer" style="width: 100%; height: 500px"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+                // Toggle current FAQ
+                faqItem.classList.toggle('active');
+                if (faqItem.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = 0;
+                }
+            });
+        });
+    
+        // --- Demo Bot Tabs ---
+        const tabs = document.querySelectorAll('.demo-tab');
+        const contents = document.querySelectorAll('.demo-content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const targetContent = document.querySelector(tab.dataset.target);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
 
+        // --- Initialize Landbot Bots ---
+        // Check if Landbot is available on the window object
+        if (typeof Landbot !== 'undefined') {
 
-    <section id="pricing">
-        <div class="container">
-            <h2>Our Pricing</h2>
-            <p class="section-subtitle">Simple, transparent pricing plans for businesses of all sizes.</p>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Standard</h3> <p>Perfect for small businesses.</p> <div class="price">R399<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i>AI-powered booking chatbot</li>
-                        <li><i class="fas fa-check"></i>Email reminders & rebooking prompts</li>
-                        <li><i class="fas fa-check"></i>Google Calendar integration</li>
-                        <li><i class="fas fa-check"></i>Uptime monitoring & support</li>
-                        <li><i class="fas fa-check"></i>Up to 200 bookings/month</li>
-                    </ul> <a href="#contact" class="btn">Choose Standard</a>
-                </div>
-                <div class="pricing-card pro">
-                    <h3>Pro</h3> <p>Ideal for high-volume businesses.</p> <div class="price">R699<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i>Everything in Standard, plus:</li>
-                        <li><i class="fas fa-check"></i>SMS confirmations & rebooking nudges</li>
-                        <li><i class="fas fa-check"></i>Priority support</li>
-                        <li><i class="fas fa-check"></i>Enhanced analytics & reporting</li>
-                        <li><i class="fas fa-check"></i>AI customer insights (soon)</li>
-                        <li><i class="fas fa-check"></i>Up to 400 bookings/month</li>
-                    </ul> <a href="#contact" class="btn">Choose Pro</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3> <p>For businesses ready to scale.</p> <div class="price">From R1,200<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i>Fully custom solution</li>
-                        <li><i class="fas fa-check"></i>API access & advanced automation</li>
-                        <li><i class="fas fa-check"></i>Chain-wide analytics dashboard</li>
-                        <li><i class="fas fa-check"></i>Volume-based SMS scaling</li>
-                        <li><i class="fas fa-check"></i>Priority Support</li>
-                    </ul> <a href="#contact" class="btn">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            // BizFlow Customer Support AI Agent (POP-UP BOT)
+            var myLandbotPopup;
+            function initLandbotPopup() {
+                if (!myLandbotPopup) {
+                    myLandbotPopup = new Landbot.Popup({
+                        configUrl: 'https://storage.googleapis.com/landbot.pro/v3/H-3011456-7V3ITXLBUG93C9HG/index.json',
+                    });
+                }
+            }
+            window.addEventListener('mouseover', initLandbotPopup, { once: true });
+            window.addEventListener('touchstart', initLandbotPopup, { once: true });
+            
+            // Nail Salon Bot (Embedded)
+            new Landbot.Container({  
+                container: '#nailSalonContainer',  
+                configUrl: 'https://storage.googleapis.com/landbot.pro/v3/H-3035112-DFODATSZV0IK3GLS/index.json',  
+            });
+    
+            // Barbershop Bot (Embedded)
+            const barberConfigUrl = 'YOUR_BARBERSHOP_BOT_CONFIG_URL_HERE'; 
+            const barberContainer = document.querySelector('#barberShopContainer');
 
-    <section id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-accordion">
-                <div class="faq-item"> <button class="faq-question">Do I need a website?</button> <div class="faq-answer"> <p>No — we’ll set you up with a branded 1-page site if needed. Our chatbot can also be integrated into an existing website or your social media pages.</p> </div> </div>
-                <div class="faq-item"> <button class="faq-question">Do you send booking reminders?</button> <div class="faq-answer"> <p>Yes! Pro users get automatic SMS text confirmations and follow-up reminders to reduce no-shows and encourage rebooking.</p> </div> </div>
-                <div class="faq-item"> <button class="faq-question">What support do you offer?</button> <div class="faq-answer"> <p>The Standard plan includes email support. The Pro plan adds priority email & SMS support for faster assistance.</p> </div> </div>
-            </div>
-        </div>
-    </section>
+            if (barberConfigUrl && barberConfigUrl !== 'YOUR_BARBERSHOP_BOT_CONFIG_URL_HERE' && barberContainer) {
+                new Landbot.Container({
+                    container: barberContainer,
+                    configUrl: barberConfigUrl, 
+                });
+            } else if (barberContainer) {
+                // Display a helpful message if the bot is not configured
+                barberContainer.innerHTML = '<div style="text-align:center; padding: 40px; color: #5e6c84; font-family: Poppins, sans-serif;">Barbershop bot demo is not configured yet.</div>';
+            }
+        } else {
+          console.error('Landbot script not loaded.');
+        }
+      });
+    </script>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Ready to 
+</body>
+</html>
