@@ -617,3 +617,36 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 </script>
 </body>
 </html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
+
+<script type="module">
+
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+
+    webhookUrl: 'https://myexpensebot.duckdns.org/webhook/11418fef-f761-43d8-b6b7-8331abbce908/chat',
+
+    initialMessages: [
+
+      'Hi there! 👋 I\'m BizBot — your BizFlow assistant. What kind of business do you run?'
+
+    ],
+
+    i18n: {
+
+      en: {
+
+        title: 'BizBot',
+
+        subtitle: 'AI assistant for BizFlow',
+
+        inputPlaceholder: 'Type your message...',
+
+      }
+
+    }
+
+  });
+
+</script>
