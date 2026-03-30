@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
 <style>
 :root {
   --cream:    #f7f2e8;
@@ -642,6 +643,22 @@ const cObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+</script>
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  createChat({
+    webhookUrl: 'https://myexpensebot.duckdns.org/webhook/bizflow-lead-gen-v3/chat',
+    initialMessages: [
+      'Hey there! 👋 Welcome to BizFlow. What kind of business do you run?'
+    ],
+    i18n: {
+      en: {
+        title: 'BizBot',
+        subtitle: 'AI booking assistant',
+        inputPlaceholder: 'Type your message...',
+      }
+    }
+  });
 </script>
 </body>
 </html>
