@@ -633,4 +633,15 @@ const cObs = new IntersectionObserver(entries => {
     const el = e.target, target = parseInt(el.dataset.count);
     if (!target) return;
     let n = 0;
-    const ti
+    const timer = setInterval(() => {
+      n += Math.ceil(target / 60);
+      if (n >= target) { n = target; clearInterval(timer); }
+      el.textContent = n.toLocaleString() + (el.dataset.suffix || '');
+    }, 30);
+    cObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+</script>
+</body>
+</html>
