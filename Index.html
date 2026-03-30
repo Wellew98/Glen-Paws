@@ -606,8 +606,6 @@ footer { background: var(--sienna); border-top: 1px solid rgba(255,255,255,0.06)
   </div>
 </footer>
 
-<div id="n8n-chat"></div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const obs = new IntersectionObserver(
   entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -649,11 +647,10 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 <script type="module">
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
   createChat({
+    mode: 'webhook',
     webhookUrl: 'https://myexpensebot.duckdns.org/webhook/bizflow-lead-gen-v3/chat',
-    target: '#n8n-chat',
-    mode: 'window',
     initialMessages: [
-      'Hey there! 👋 Welcome to BizFlow. What kind of business do you run?'
+      'Hey there! Welcome to BizFlow. What kind of business do you run?'
     ],
     i18n: {
       en: {
