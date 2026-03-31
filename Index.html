@@ -648,6 +648,7 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
   createChat({
     webhookUrl: 'https://n8n.srv1544967.hstgr.cloud/webhook/20e4a839-b5d3-4bd5-a905-a03e44c30fb9/chat',
+    showWelcomeScreen: false,
     initialMessages: [
       'Hi there! 👋 I\'m BizBot — your BizFlow assistant. What kind of business do you run?'
     ],
