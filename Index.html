@@ -644,17 +644,21 @@ const cObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 </script>
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 <script type="module">
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
   createChat({
     webhookUrl: 'https://n8n.srv1544967.hstgr.cloud/webhook/20e4a839-b5d3-4bd5-a905-a03e44c30fb9/chat',
+    mode: 'window',
+    showWelcomeScreen: true,
     initialMessages: [
-      'Hi there! 👋 I\'m BizBot — your BizFlow assistant. What kind of business do you run?'
+      'Hi there! 👋',
+      'I\'m BizBot. How can I help your business today?'
     ],
     i18n: {
       en: {
-        title: 'BizBot',
-        subtitle: 'AI assistant for BizFlow',
+        title: 'BizFlow AI',
+        subtitle: 'Ask me anything about our services',
         inputPlaceholder: 'Type your message...',
       }
     }
